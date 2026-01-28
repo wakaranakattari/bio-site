@@ -18,7 +18,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: '九层地狱 | Full-Stack Developer',
+  title: 'wkrn | Full-Stack Developer',
   description: 'Desarrollador Full-Stack especializado en tecnologías modernas',
   icons: {
     icon: [
