@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #1f2937;
+    --card: #ffffff;
+    --card-foreground: #1f2937;
+    --border: #e5e7eb;
+    --accent: #2959aa;
+    --accent-foreground: #ffffff;
+    --muted: #f9fafb;
+    --muted-foreground: #6b7280;
+  }
+
+  .dark {
+    --background: #1a1b26;
+    --foreground: #c0caf5;
+    --card: #24283b;
+    --card-foreground: #c0caf5;
+    --border: #414868;
+    --accent: #7aa2f7;
+    --accent-foreground: #ffffff;
+    --muted: #24283b;
+    --muted-foreground: #565f89;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .glass-effect {
+    @apply backdrop-blur-sm bg-white/10 dark:bg-black/10 border border-white/20 dark:border-black/20;
+  }
+
+  .card {
+    @apply bg-card text-card-foreground border border-border rounded-2xl;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#2959aa] to-[#5a3e8e] dark:from-[#7aa2f7] dark:to-[#bb9af7];
+  }
+}
