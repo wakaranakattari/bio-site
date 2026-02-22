@@ -2,75 +2,29 @@
 
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
-export type Locale = 'es' | 'en' | 'ru' | 'zh';
+export type Locale = 'en' | 'ru' | 'zh';
 
 const translations = {
-  es: {
-    navigation: { home: 'Inicio', about: 'Sobre Mí', projects: 'Proyectos', contact: 'Contacto' },
-    hero: {
-      greeting: 'Hola, soy',
-      name: 'Nikita',
-      age: '17 años',
-      role: 'Desarrollador Full-Stack',
-      description: 'Creando soluciones elegantes con tecnologías modernas',
-      viewProjects: 'Ver Proyectos',
-      contact: 'Contactarme',
-    },
-    about: {
-      title: 'Sobre',
-      highlight: 'Mí',
-      bio: 'Soy Nikita, desarrollador de 17 años apasionado por crear software innovador. Me especializo en tecnologías web modernas.',
-      journey:
-        'Comencé a programar a los 14 años y desde entonces he estado construyendo proyectos que resuelven problemas reales.',
-      philosophy: 'Creo en el código limpio, la documentación clara y las soluciones escalables.',
-      location: 'Basado en Internet',
-      education: 'Autodidacta & Comunidad',
-      focus: 'Rendimiento & Experiencia de Usuario',
-      skills: 'Habilidades & Tecnologías',
-    },
-    projects: {
-      title: 'Mis',
-      highlight: 'Proyectos',
-      description: 'Proyectos de código abierto en GitHub',
-      stars: 'estrellas',
-      forks: 'forks',
-      updated: 'Actualizado',
-      license: 'Licencia',
-      noDescription: 'Sin descripción',
-      error: 'No se pudieron cargar proyectos',
-      noProjects: 'No hay proyectos',
-    },
-    contact: {
-      title: 'Contacto',
-      highlight: 'Conmigo',
-      description: 'No dudes en contactarme a través de cualquiera de estos canales.',
-    },
-    footer: {
-      rights: 'Todos los derechos reservados.',
-      contact: { title: 'Contacto', highlight: 'Conmigo' },
-    },
-  },
   en: {
     navigation: { home: 'Home', about: 'About', projects: 'Projects', contact: 'Contact' },
     hero: {
       greeting: "Hi, I'm",
       name: 'Nikita',
       age: '17 years old',
-      role: 'Full-Stack Developer',
-      description: 'Creating elegant solutions with modern technologies',
+      role: 'C++ / Web Developer',
+      description: 'I write code in C++ and do web development.',
       viewProjects: 'View Projects',
       contact: 'Contact Me',
     },
     about: {
       title: 'About',
       highlight: 'Me',
-      bio: "I'm Nikita, a 17-year-old developer passionate about creating innovative software. I specialize in modern web technologies.",
-      journey:
-        'Started programming at 14 and have been building projects that solve real problems ever since.',
-      philosophy: 'I believe in clean code, clear documentation, and scalable solutions.',
+      bio: "My name is Nikita, I'm 17 years old. I write code in C++ and do web development.",
+      journey: 'Started with C++ at 14, then learned web development. Now I use both.',
+      philosophy: 'I like clean code and simple solutions.',
       location: 'Based on the Internet',
       education: 'Self-Taught & Community',
-      focus: 'Performance & User Experience',
+      focus: 'Systems & Web',
       skills: 'Skills & Technologies',
     },
     projects: {
@@ -98,21 +52,20 @@ const translations = {
       greeting: 'Привет, я',
       name: 'Никита',
       age: '17 лет',
-      role: 'Full-Stack разработчик',
-      description: 'Создаю элегантные решения на современных технологиях',
+      role: 'C++ / Web разработчик',
+      description: 'Пишу на C++ и занимаюсь веб-разработкой.',
       viewProjects: 'Проекты',
       contact: 'Связаться',
     },
     about: {
       title: 'Обо',
       highlight: 'Мне',
-      bio: 'Я Никита, 17-летний разработчик, увлеченный созданием инновационного программного обеспечения. Специализируюсь на современных веб-технологиях.',
-      journey:
-        'Начал программировать в 14 лет и с тех пор создаю проекты, решающие реальные проблемы.',
-      philosophy: 'Верю в чистый код, ясную документацию и масштабируемые решения.',
+      bio: 'Меня зовут Никита, мне 17 лет. Пишу на C++ и занимаюсь веб-разработкой.',
+      journey: 'Начал с C++ в 14 лет, потом освоил веб. Сейчас использую оба направления.',
+      philosophy: 'Люблю чистый код и простые решения.',
       location: 'На просторах интернета',
       education: 'Самоучка & Сообщество',
-      focus: 'Производительность & UX',
+      focus: 'Системы & Веб',
       skills: 'Навыки & Технологии',
     },
     projects: {
@@ -143,20 +96,20 @@ const translations = {
       greeting: '你好，我是',
       name: 'Nikita',
       age: '17岁',
-      role: '全栈开发者',
-      description: '用现代技术创造优雅的解决方案',
+      role: 'C++ / 网页开发者',
+      description: '写C++代码和做网页开发。',
       viewProjects: '查看项目',
       contact: '联系我',
     },
     about: {
       title: '关于',
       highlight: '我',
-      bio: '我是Nikita，17岁的开发者，热衷于创造创新软件。专攻现代网络技术。',
-      journey: '14岁开始编程，从那以后一直在构建解决实际问题的项目。',
-      philosophy: '我相信干净的代码、清晰的文档和可扩展的解决方案。',
+      bio: '我叫Nikita，17岁。写C++代码和做网页开发。',
+      journey: '14岁开始学C++，后来学了网页开发。现在两种都用。',
+      philosophy: '我喜欢干净的代码和简单的解决方案。',
       location: '基于互联网',
       education: '自学与社区',
-      focus: '性能与用户体验',
+      focus: '系统与网页',
       skills: '技能与技术',
     },
     projects: {
@@ -185,7 +138,7 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocale] = useState<Locale>('es');
+  const [locale, setLocale] = useState<Locale>('en');
 
   useEffect(() => {
     const saved = localStorage.getItem('language') as Locale;
