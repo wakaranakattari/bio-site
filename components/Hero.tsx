@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, Sparkles, Code2, Cpu, User } from 'lucide-react';
+import { ArrowRight, Sparkles, Code2, Cpu, Terminal } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from './LanguageProvider';
 
@@ -20,7 +20,7 @@ export function Hero() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full card mb-8">
               <Sparkles className="w-4 h-4 text-accent" />
-              <span className="text-sm font-medium">{t('hero.role')}</span>
+              <span className="text-sm font-medium">C++ / Web Developer</span>
             </div>
 
             <div className="mb-8">
@@ -69,7 +69,17 @@ export function Hero() {
             <div className="p-6 rounded-2xl card">
               <div className="flex items-center gap-4 mb-4">
                 <div className="p-3 rounded-xl bg-blue-500/10">
-                  <Code2 className="w-6 h-6 text-blue-500" />
+                  <Terminal className="w-6 h-6 text-blue-500" />
+                </div>
+                <h3 className="text-xl font-bold">C++</h3>
+              </div>
+              <p className="text-muted-foreground">Modern C++ (17/20), STL, Multithreading, CMake</p>
+            </div>
+
+            <div className="p-6 rounded-2xl card">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-3 rounded-xl bg-purple-500/10">
+                  <Code2 className="w-6 h-6 text-purple-500" />
                 </div>
                 <h3 className="text-xl font-bold">Frontend</h3>
               </div>
@@ -78,22 +88,12 @@ export function Hero() {
 
             <div className="p-6 rounded-2xl card">
               <div className="flex items-center gap-4 mb-4">
-                <div className="p-3 rounded-xl bg-purple-500/10">
-                  <Cpu className="w-6 h-6 text-purple-500" />
+                <div className="p-3 rounded-xl bg-green-500/10">
+                  <Cpu className="w-6 h-6 text-green-500" />
                 </div>
                 <h3 className="text-xl font-bold">Backend</h3>
               </div>
-              <p className="text-muted-foreground">Node.js, Python, PostgreSQL, Docker</p>
-            </div>
-
-            <div className="p-6 rounded-2xl card">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="p-3 rounded-xl bg-green-500/10">
-                  <User className="w-6 h-6 text-green-500" />
-                </div>
-                <h3 className="text-xl font-bold">Community</h3>
-              </div>
-              <p className="text-muted-foreground">Open source contributor & tech enthusiast</p>
+              <p className="text-muted-foreground">Node.js, Python, PostgreSQL, Docker, Git</p>
             </div>
           </motion.div>
         </div>
