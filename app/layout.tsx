@@ -42,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-background text-foreground min-h-screen antialiased`}
+        suppressHydrationWarning
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <LanguageProvider>
