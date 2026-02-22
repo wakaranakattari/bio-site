@@ -7,29 +7,29 @@ import { useLanguage } from '@/components/LanguageProvider';
 export default function AboutPage() {
   const { t } = useLanguage();
 
-  const skills = [
+    const skills = [
+    {
+      icon: Cpu,
+      title: 'Systems (C++)',
+      items: ['Modern C++ (17/20)', 'STL', 'Multithreading', 'CMake', 'Low-level networking'],
+      color: 'bg-blue-500/10',
+    },
     {
       icon: Code2,
       title: 'Frontend',
       items: ['React', 'Next.js 14', 'TypeScript', 'Tailwind CSS'],
-      color: 'bg-blue-500/10',
+      color: 'bg-purple-500/10',
     },
     {
       icon: Server,
       title: 'Backend',
-      items: ['Node.js', 'Python', 'PostgreSQL', 'Redis'],
-      color: 'bg-purple-500/10',
-    },
-    {
-      icon: Database,
-      title: 'Databases',
-      items: ['MongoDB', 'MySQL', 'PostgreSQL', 'Elasticsearch'],
+      items: ['Node.js', 'Python', 'PostgreSQL', 'Docker', 'Git'],
       color: 'bg-green-500/10',
     },
     {
-      icon: Cpu,
-      title: 'Tools',
-      items: ['Docker', 'Git', 'VS Code', 'Figma'],
+      icon: Database,
+      title: 'Tools & Debug',
+      items: ['Linux', 'Bash', 'GDB', 'Valgrind', 'VS Code'],
       color: 'bg-orange-500/10',
     },
   ];
