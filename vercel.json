@@ -1,9 +1,0 @@
-{
-  "buildCommand": "npx shadow-cljs release app",
-  "outputDirectory": "public",
-  "installCommand": "npm install",
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
-}
