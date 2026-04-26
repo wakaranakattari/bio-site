@@ -1,0 +1,13 @@
+.shadow-cljs/
+public/js/
+!public/js/.gitkeep
+.lsp/
+.clj-kondo/
+
+node_modules/
+package-lock.json
+
+.log
+.cpcache/
+/.cpcache
+public/js/

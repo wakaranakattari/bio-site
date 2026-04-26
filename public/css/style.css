@@ -1,0 +1,291 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
+
+/* SITE SETTINGS */
+:root {
+  --bg-main: #202020;
+  --bg-second: #625956;
+  --accent-color: #EFD5C5;
+  --green-accent: #A8C89F;
+  --blue-accent: #8FCFD0;
+  --yellow-accent: #DEB07A;
+  --purple-accent: #A0A0CF;
+}
+
+body {
+  font-family: 'Google Sans', sans-serif;
+  background-color: #202020;
+}
+
+/* SITE SETTINGS EOF */
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-bottom: 1px solid var(--bg-second);
+  padding: 1rem;
+  font-size: 25px;
+}
+
+.nickname {
+  color: var(--bg-main);
+  border: 1px solid var(--accent-color);
+  background-color: var(--accent-color);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 25px;
+}
+
+.nav-item {
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--accent-color);
+}
+
+/* HEADER EOF */
+
+/* HOME PAGE */
+main.home-container {
+  display: flex;
+  height: 90vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--accent-color);
+  animation: fadeIn 0.5s ease;
+}
+
+.hero h1 {
+  font-size: 4rem;
+  margin: -15px;
+}
+
+.hero h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.button-group a {
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid var(--bg-second);
+  padding: 10px 10px;
+  background-color: var(--bg-second);
+  color: var(--accent-color);
+  margin: 10px;
+  border-radius: 5px;
+  transition: 0.3s ease;
+  font-size: 25px;
+}
+
+.button-group a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px var(--bg-second);
+}
+
+/* HOME PAGE EOF */
+
+/* ABOUT PAGE */
+main.about-container {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  animation: fadeIn 0.5s ease;
+}
+
+.about-me,
+.my-philosophy,
+.my-interests,
+.my-stack {
+  margin-bottom: 3rem;
+}
+
+.my-stack {
+  margin-bottom: 0;
+}
+
+.about-me h1,
+.my-philosophy h1,
+.my-interests h1,
+.my-stack h1 {
+  font-size: 2.5rem;
+  color: var(--yellow-accent);
+}
+
+.about-me p,
+.my-philosophy p,
+.my-interests p,
+.my-stack p {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  color: var(--accent-color);
+}
+
+.my-stack h2 {
+  font-size: 1.8rem;
+  margin: 1.5rem 0 0.5rem 0;
+  color: var(--green-accent);
+}
+
+.my-stack p {
+  font-size: 1.3rem;
+}
+
+/* ABOUT PAGE EOF */
+
+/* PROJECTS PAGE */
+
+main.projects-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: var(--accent-color);
+  animation: fadeIn 0.5s ease;
+}
+
+.projects-container h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.repos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.repo-card {
+  background: var(--bg-second);
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--accent-color);
+  transition: 0.2s;
+  display: block;
+}
+
+.repo-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 15px var(--bg-second);
+}
+
+.repo-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.repo-card p {
+  margin: 0 0 1rem 0;
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+.repo-card span {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.skeleton-card {
+  background: var(--bg-second);
+  border-radius: 12px;
+  padding: 1.5rem;
+  animation: skeleton-pulse 1.2s ease-in-out infinite;
+}
+
+.skeleton-title {
+  height: 24px;
+  width: 70%;
+  background: var(--accent-color);
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.skeleton-line {
+  height: 16px;
+  background: var(--accent-color);
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+}
+
+.skeleton-line.short {
+  width: 40%;
+}
+
+/* PROJECTS PAGE EOF */
+
+/* CONTACTS PAGE */
+main.contacts-container {
+  display: flex;
+  padding: 10rem;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 0 auto;
+  animation: fadeIn 0.5s ease;
+}
+
+main.contacts-container h1 {
+  font-size: 2.5rem;
+  color: var(--yellow-accent);
+}
+
+main.contacts-container p {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  color: var(--accent-color);
+}
+
+main.contacts-container a {
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid var(--bg-second);
+  padding: 10px 10px;
+  background-color: var(--bg-second);
+  color: var(--accent-color);
+  margin: 10px;
+  border-radius: 5px;
+  transition: 0.3s ease;
+  font-size: 25px;
+  text-align: center;
+}
+
+main.contacts-container a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px var(--bg-second);
+}
+
+/* ANIMATIONS & MEDIAQ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes skeleton-pulse {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ANIMATIONS & MEDIAQ EOF */

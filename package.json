@@ -1,0 +1,29 @@
+{
+  "name": "bio-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.10",
+    "shadow-cljs": "^3.4.4",
+    "tailwindcss": "^4.2.4"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.2.4",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5"
+  },
+  "engines": {
+    "node": "20.x",
+    "npm": "10.x"
+  }
+}
