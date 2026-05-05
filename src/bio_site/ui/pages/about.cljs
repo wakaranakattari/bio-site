@@ -72,7 +72,7 @@
               "i believe they wont go beyond their comfort zone of one or two such tools "
               "and will continue to live in their own rosy world")]
 
-     [:p (str "people are too stereotypical, and itss this imposed stereotype "
+     [:p (str "people are too stereotypical, and its this imposed stereotype "
               "that prevents them from discovering something new. ive encountered this "
               "very stereotype myself. i used to think that non-mainstream tools were disgusting "
               "and created for fun. take pascal, for example. the imposed stereotypes about the tool "
@@ -106,6 +106,7 @@
               "guys, dont do that. people dont really care about your opinions. "
               "they dont suffer from your loud takeovers, but youll have mental health problems in the future")]]]
 
+   ;; disclaimer-1 section
    [:p {:class "disclaimer-1"}
     " *1 - this is my personal opinion. "
     "im not here to argue. "
