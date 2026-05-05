@@ -3,7 +3,8 @@
             [bio-site.ui.pages.home :as home]
             [bio-site.ui.pages.about :as about]
             [bio-site.ui.pages.projects :as projects]
-            [bio-site.ui.pages.contacts :as contacts]))
+            [bio-site.ui.pages.contacts :as contacts]
+            [bio-site.ui.pages.writing :as writing]))
 
 (defn current-page []
   (let [path (.-pathname js/location)]
@@ -11,6 +12,7 @@
       (.startsWith path "/about") [about/page]
       (.startsWith path "/projects") [projects/page]
       (.startsWith path "/contacts") [contacts/page]
+      (.startsWith path "/writing") [writing/page]
       :else [home/page])))
 
 (defonce root (rdc/create-root (js/document.getElementById "app")))
