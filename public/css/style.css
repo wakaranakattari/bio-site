@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
 
-/* SITE SETTINGS */
+/* SITE SETTINGS & VARS */
 :root {
   --bg-main: #202020;
   --bg-second: #625956;
@@ -16,7 +16,7 @@ body {
   background-color: #202020;
 }
 
-/* SITE SETTINGS EOF */
+/* SITE SETTINGS EOS */
 
 /* HEADER */
 .header {
@@ -28,22 +28,24 @@ body {
   font-size: 25px;
 }
 
-.nickname {
-  color: var(--bg-main);
-  border: 1px solid var(--accent-color);
-  background-color: var(--accent-color);
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 25px;
-}
-
 .nav-item {
   text-decoration: none;
   cursor: pointer;
   color: var(--accent-color);
+  transition: 0.2s ease;
 }
 
-/* HEADER EOF */
+.nav-item:hover {
+  color: var(--yellow-accent);
+}
+
+.nav-item.active {
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--yellow-accent);
+}
+
+/* HEADER EOS */
 
 /* HOME PAGE */
 main.home-container {
@@ -86,7 +88,7 @@ main.home-container {
   box-shadow: 0 0 15px var(--bg-second);
 }
 
-/* HOME PAGE EOF */
+/* HOME PAGE EOS */
 
 /* ABOUT PAGE */
 main.about-container {
@@ -149,7 +151,7 @@ main.about-container {
   color: var(--yellow-accent);
 }
 
-/* ABOUT PAGE EOF */
+/* ABOUT PAGE EOS */
 
 /* PROJECTS PAGE */
 
@@ -229,7 +231,32 @@ main.projects-container {
   width: 40%;
 }
 
-/* PROJECTS PAGE EOF */
+/* PROJECTS PAGE EOS */
+
+/* WRITING PAGE */
+
+.writing {
+  display: flex;
+  padding: 10rem;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 0 auto;
+  animation: fadeIn 0.5s ease;
+}
+
+.writing h1 {
+  font-size: 2.5rem;
+  color: var(--yellow-accent);
+}
+
+.writing p {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  color: var(--accent-color);
+}
+
+/* WRITING PAGE EOS */
 
 /* CONTACTS PAGE */
 main.contacts-container {
@@ -525,4 +552,4 @@ main.contacts-container a:hover {
   }
 }
 
-/* ANIMATIONS & MEDIAQ EOF */
+/* ANIMATIONS & MEDIAQ EOS */
