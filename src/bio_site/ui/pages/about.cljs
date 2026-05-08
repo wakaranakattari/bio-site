@@ -1,26 +1,36 @@
+;; @file    pages/about.cljs
+;; @author  <wakaranakattari@gmail.com>
+;; @info    <about me page>
+;; @version 1.3
+
+;; @secstart->@secname <nsrq>
 (ns bio-site.ui.pages.about
   (:require [bio-site.ui.components.header :as header]))
+;; @secend->@secname   <nsrq>
 
+;; @secstart->@secname <aboutpage>
+  ;; @funcinfo <about page implementation, this contains all the basic information about me and my indignation>
 (defn page []
   [:div
-   ;; header call
    [header/header]
 
-   ;; about page container
+   ;; @secstart->@secname <maincontainer>
+    ;; @info <main container which contains all the sections & content>
    [:main.about-container
 
-    ;; about me section
+    ;; @secstart->@secname <aboutme>
+      ;; @info <main information for me>
     [:section.about-me
-
      [:h1 "about me"]
 
      [:p "nikita · 18 years · gay · infj-a"]
 
      [:p "im a software engineer who loves exotic and strange languages"]]
+    ;; @secend->@secname   <aboutme>
 
-    ;; my philosophy section
+    ;; @secstart->@secname <myphilosophy>
+      ;; @info <my personal philosophy> 
     [:section.my-philosophy
-
      [:h1 "my philosophy"]
 
      [:p "im convinced that exotic tools in the right hands can work wonders "
@@ -36,8 +46,10 @@
               "so i started trying new things for myself, and now i am at the point of no return, "
               "i saw all the beauty and elegance of other tools, many people think that many languages "
               "are dead or rarely used, but i can say one thing - you just didnt understand them")]]
+    ;; @secend->@secname   <myphilosophy>
 
-    ;; my interests section
+    ;; @secstart->@secname <myinterests>
+      ;; @info <my most basics interests>
     [:section.my-interests
 
      [:h1 "my interests"]
@@ -49,8 +61,10 @@
      [:p (str "i love programming and everything related to it. for me, programming is a way "
               "to show myself and the world that imm a creative and interesting person. "
               "i believe programming is a panacea, as silly as that may sound")]]
+    ;; @secend->@secname   <myinterests>
 
-    ;; my stack section
+    ;; @secstart->@secname <mystack>
+      ;; @info <my main stack, p.s... i very luv perl & clj..>
     [:section.my-stack
      [:h1 "what i use"]
      [:h2 "languages"]
@@ -59,9 +73,12 @@
      [:p "react · vue.js · next.js · reagent"]
      [:h2 "tools"]
      [:p "neovim · emacs · docker · nginx · linux"]]
+    ;; @secend->@secname   <mystack>
 
-    ;; my indignation section
+    ;; @secstart->@secname <myindignation>
+      ;; @info <these are my personal indignations and thoughts, please take it easy)>
     [:section.my-indignation
+     ;; @info <*1 etc this is a footnote or a disclaimer, read below>
      [:h1 "*1 my indignation"]
 
      [:p (str "i dont really understand why the vast majority of programmers "
@@ -105,9 +122,14 @@
               "they fight for their imaginary tool by insulting others and filling their own insecurities. "
               "guys, dont do that. people dont really care about your opinions. "
               "they dont suffer from your loud takeovers, but youll have mental health problems in the future")]]]
+      ;; @secend->@secname <myindignation>
+    ;; @secend->@secname <maincontainer>
+;; @secend->@secname   <aboutpage>
 
-   ;; disclaimer-1 section
+;; @secstart->@secname <disclaimer1>
+    ;; @info <the disclaimer is there so that when people express dissatisfaction with my indignation, they can scroll down and read it>
    [:p {:class "disclaimer-1"}
     " *1 - this is my personal opinion. "
     "im not here to argue. "
     "either you resonate with it or not - i genuinely dont care."]])
+  ;; @secend->@secname <disclaimer1> 
