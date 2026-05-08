@@ -29,7 +29,7 @@ Every file starts with a header
 | @info | Brief description of what the file does |
 | @version | Current version |
 
-## Namespace Section & Namespace or Require section
+## Namespace Section & Namespace and Require section
 
 ### Namespace
 The `ns` form is wrapped a section:
