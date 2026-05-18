@@ -11,9 +11,21 @@
   --purple-accent: #A0A0CF;
 }
 
+.light-theme {
+  --bg-main: #f8f9fa;
+  --bg-second: #e9ecef;
+  --accent-color: #2d3436;
+  --green-accent: #4a7c59;
+  --blue-accent: #2a6f70;
+  --yellow-accent: #c7961c;
+  --purple-accent: #6c5ce7;
+  --text-main: #212529;
+}
+
 body {
   font-family: 'Google Sans', sans-serif;
-  background-color: #202020;
+  background-color: var(--bg-main);
+  color: var(--text-main);
 }
 
 /* SITE SETTINGS EOS */
@@ -26,6 +38,7 @@ body {
   border-bottom: 1px solid var(--bg-second);
   padding: 1rem;
   font-size: 25px;
+  gap: 2rem;
 }
 
 .nav-item {
@@ -43,6 +56,26 @@ body {
   text-decoration: none;
   cursor: pointer;
   color: var(--yellow-accent);
+}
+
+.theme-btn {
+  margin-left: auto;
+  display: flex;
+  align-items: flex-end;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid var(--bg-second);
+  border-radius: 5px;
+  background-color: var(--bg-second);
+  color: var(--accent-color);  
+  transition: 0.3s ease;
+  font-size: 20px;
+  padding: 0.4rem 0.8rem;
+}
+
+.theme-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 10px var(--bg-second);
 }
 
 /* HEADER EOS */
