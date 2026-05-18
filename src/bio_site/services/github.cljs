@@ -1,7 +1,7 @@
-;; @file    services/github.cljs
+;; @file    <services/github.cljs>
 ;; @author  <wakaranakattari@gmail.com>
 ;; @info    <github fetch api for dynamic loading repos>
-;; @version 1.3
+;; @version <1.4>
 
 ;; @secstart->@secname <ns>
 (ns bio-site.services.github)
@@ -21,7 +21,7 @@
                (let [repos (js->clj data :keywordize-keys true)
                      filtered (filter #(not (:fork %)) repos)]
 
-                ;; @info <if convert to clj map etc is successfully>  
+                ;; @info <if convert to clj map etc is successfully>
                  (on-success filtered))))
 
       ;; @info <if fetch via api || parse to json || convert to clj map is failed>

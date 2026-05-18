@@ -1,7 +1,7 @@
-;; @file    components/repo-card.cljs
+;; @file    <components/repo-card.cljs>
 ;; @author  <wakaranakattari@gmail.com>
 ;; @info    <repos card component>
-;; @version 1.3
+;; @version <1.4>
 
 ;; @secstart->@secname <ns>
 (ns bio-site.ui.components.repo-card)

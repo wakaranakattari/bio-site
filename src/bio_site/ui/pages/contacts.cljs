@@ -1,7 +1,7 @@
-;; @file    pages/contacts.cljs
+;; @file    <pages/contacts.cljs>
 ;; @author  <wakaranakattari@gmail.com>
 ;; @info    <contacts page>
-;; @version 1.3
+;; @version <1.4>
 
 ;; @secstart->@secname <nsrq>
 (ns bio-site.ui.pages.contacts

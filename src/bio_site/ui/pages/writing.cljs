@@ -1,7 +1,7 @@
-;; @file    pages/writing.cljs
+;; @file    <pages/writing.cljs>
 ;; @author  <wakaranakattari@gmail.com>
 ;; @info    <writing page, personal thoughts and articles>
-;; @version 1.3
+;; @version <1.4>
 
 ;; @secstart->@secname <nsrq>
 (ns bio-site.ui.pages.writing

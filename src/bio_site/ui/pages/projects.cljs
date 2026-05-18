@@ -1,7 +1,7 @@
-;; @file    pages/projects.cljs
+;; @file    <pages/projects.cljs>
 ;; @author  <wakaranakattari@gmail.com>
 ;; @info    <projects page, displays github repositories with loading skeleton>
-;; @version 1.3
+;; @version <1.4>
 
 ;; @secstart->@secname <nsrq>
 (ns bio-site.ui.pages.projects

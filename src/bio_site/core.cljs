@@ -1,7 +1,7 @@
-;; @file    core.cljs
+;; @file    <core.cljs>
 ;; @author  <wakaranakattari@gmail.com>
 ;; @info    <core site>
-;; @version 1.3
+;; @version <1.4>
 
 ;; @secstart->@secname <nsrq>
 (ns bio-site.core

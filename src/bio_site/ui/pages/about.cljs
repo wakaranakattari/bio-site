@@ -1,7 +1,7 @@
-;; @file    pages/about.cljs
+;; @file    <pages/about.cljs>
 ;; @author  <wakaranakattari@gmail.com>
 ;; @info    <about me page>
-;; @version 1.3
+;; @version <1.4>
 
 ;; @secstart->@secname <nsrq>
 (ns bio-site.ui.pages.about
