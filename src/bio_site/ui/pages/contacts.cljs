@@ -30,6 +30,7 @@
      ;; @info <buttons link for socials>
     [:section.buttons]
     [:a {:href "https://github.com/wakaranakattari"} "my github"]
+    [:a {:href "https://gitlab.com/wakaranakattari"} "my gitlab"]
     [:a {:href "https://t.me/wakaranakattari"} "my telegram"]
     [:a {:href "https://discord.com/users/1466086440499941689"} "my discord"]]])
    ;; @secend->@secname    <buttons>
