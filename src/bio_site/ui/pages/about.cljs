@@ -23,7 +23,7 @@
     [:section.about-me
      [:h1 "about me"]
 
-     [:p "nikita · 18 years · gay · infj-a"]
+     [:p "nikita · 18 years · infj-a"]
 
      [:p "im a software engineer who loves exotic and strange languages"]]
     ;; @secend->@secname   <aboutme>
@@ -67,12 +67,16 @@
       ;; @info <my main stack, p.s... i very luv perl & clj..>
     [:section.my-stack
      [:h1 "what i use"]
-     [:h2 "languages"]
-     [:p "clojure · java · d · perl · c++ · js & ts"]
+     [:h2 "main languages"]
+     [:p "clojure · c# · rust"]
+     [:h2 "second languages"]
+     [:p "perl · typescript · zig"]
      [:h2 "frameworks"]
-     [:p "react · vue.js · next.js · reagent"]
+     [:p "react · vue.js · reagent · dotnet · avalonia"]
      [:h2 "tools"]
-     [:p "neovim · emacs · docker · nginx · linux"]]
+     [:p "neovim · visual studio · docker · nginx · linux"]
+     [:h2 "databases"]
+     [:p "postgresql · mongodb"]]
     ;; @secend->@secname   <mystack>
 
     ;; @secstart->@secname <myindignation>
