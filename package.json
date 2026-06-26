@@ -4,14 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch:css": "sass public/css/main.scss public/css/styles.css --watch",
+    "build:css": "sass public/css/main.scss public/css/styles.css --style=compressed",
+    "dev": "npm run watch:css & shadow-cljs watch app",
+    "build": "npm run build:css && shadow-cljs release app"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "autoprefixer": "^10.5.0",
+    "autoprefixer": "^10.5.2",
+    "chokidar": "^3.6.0",
+    "sass": "^1.77.0",
     "shadow-cljs": "^3.4.4"
   },
   "dependencies": {
@@ -19,7 +24,7 @@
     "react-dom": "^19.2.5"
   },
   "engines": {
-    "node": "24.x",
+    "node": "22.x",
     "npm": "10.x"
   }
 }
