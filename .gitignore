@@ -1,13 +1,26 @@
 .shadow-cljs/
+.cpcache/
+.target/
+
 public/js/
 !public/js/.gitkeep
-.lsp/
-.clj-kondo/
+
+public/css/styles.css
+public/css/styles.css.map
 
 node_modules/
 package-lock.json
 
-.log
-.cpcache/
-/.cpcache
-public/js/
+.lsp/
+.clj-kondo/
+
+*.log
+
+.DS_Store
+Thumbs.db
+
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
