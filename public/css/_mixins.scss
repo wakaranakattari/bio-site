@@ -1,0 +1,51 @@
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin btn-style {
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid var(--bg-second);
+  padding: 10px 10px;
+  background-color: var(--bg-second);
+  color: var(--accent-color);
+  border-radius: $border-radius;
+  transition: $transition-speed;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px var(--bg-second);
+  }
+}
+
+@mixin page-container($max-width: 500px, $padding: 2rem) {
+  display: flex;
+  flex-direction: column;
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: $padding;
+  animation: fadeIn 0.5s ease;
+}
+
+@mixin text-block {
+  h1 {
+    font-size: 2.5rem;
+    color: var(--yellow-accent);
+  }
+  
+  p {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+    color: var(--accent-color);
+  }
+}

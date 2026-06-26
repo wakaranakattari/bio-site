@@ -1,0 +1,27 @@
+main.about-container {
+  @include page-container(900px, 2rem);
+  
+  .about-me,
+  .my-philosophy,
+  .my-interests,
+  .my-stack,
+  .my-indignation {
+    @include text-block;
+    margin-bottom: 3rem;
+    
+    &:last-child { margin-bottom: 0; }
+  }
+
+  .my-stack {
+    h2 {
+      font-size: 1.8rem;
+      margin: 1.5rem 0 0.5rem 0;
+      color: var(--green-accent);
+    }
+  }
+}
+
+.disclaimer-1 {
+  @include page-container(900px, 1rem);
+  color: var(--yellow-accent);
+}

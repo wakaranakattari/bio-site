@@ -1,0 +1,42 @@
+.header {
+  @include flex-between;
+  border-bottom: 1px solid var(--bg-second);
+  padding: 1rem;
+  font-size: 25px;
+  gap: 2rem;
+  flex-wrap: wrap;
+
+  .nav-item {
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--accent-color);
+    transition: $transition-speed;
+    
+    &:hover {
+      color: var(--yellow-accent);
+    }
+    
+    &.active {
+      color: var(--yellow-accent);
+    }
+  }
+
+  .theme-btn {
+    margin-left: auto;
+    @include flex-center;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid var(--bg-second);
+    border-radius: $border-radius;
+    background-color: var(--bg-second);
+    color: var(--accent-color);
+    transition: $transition-speed;
+    font-size: 20px;
+    padding: 0.4rem 0.8rem;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 10px var(--bg-second);
+    }
+  }
+}

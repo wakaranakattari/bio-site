@@ -1,0 +1,58 @@
+main.projects-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: var(--accent-color);
+  animation: fadeIn 0.5s ease;
+
+  h1 { text-align: center; margin-bottom: 2rem; }
+
+  .repos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .repo-card {
+    background: var(--bg-second);
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--accent-color);
+    transition: 0.2s;
+    display: block;
+    
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 15px var(--bg-second);
+    }
+    
+    h3 { margin: 0 0 0.5rem 0; font-size: 1.2rem; }
+    p { margin: 0 0 1rem 0; opacity: 0.8; font-size: 0.9rem; }
+    span { font-size: 0.8rem; opacity: 0.7; }
+  }
+
+  .skeleton-card {
+    background: var(--bg-second);
+    border-radius: 12px;
+    padding: 1.5rem;
+    animation: skeleton-pulse 1.2s ease-in-out infinite;
+    
+    .skeleton-title {
+      height: 24px;
+      width: 70%;
+      background: var(--accent-color);
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+    
+    .skeleton-line {
+      height: 16px;
+      background: var(--accent-color);
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+      
+      &.short { width: 40%; }
+    }
+  }
+}

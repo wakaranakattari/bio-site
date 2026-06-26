@@ -1,0 +1,15 @@
+.writing {
+  @include page-container(500px, 10rem);
+  
+  h1 {
+    font-size: 2.5rem;
+    color: var(--yellow-accent);
+  }
+  
+  p {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+    color: var(--accent-color);
+  }
+}

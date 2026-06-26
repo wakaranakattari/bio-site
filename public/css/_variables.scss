@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
+
+$font-main: 'Google Sans', sans-serif;
+$transition-speed: 0.3s ease;
+$border-radius: 5px;
+
+:root {
+  --bg-main: #202020;
+  --bg-second: #625956;
+  --accent-color: #EFD5C5;
+  --green-accent: #A8C89F;
+  --blue-accent: #8FCFD0;
+  --yellow-accent: #DEB07A;
+  --purple-accent: #A0A0CF;
+  --text-main: #ffffff;
+}
+
+.light-theme {
+  --bg-main: #f8f9fa;
+  --bg-second: #e9ecef;
+  --accent-color: #2d3436;
+  --green-accent: #4a7c59;
+  --blue-accent: #2a6f70;
+  --yellow-accent: #c7961c;
+  --purple-accent: #6c5ce7;
+  --text-main: #212529;
+}

@@ -1,0 +1,125 @@
+@media (max-width: 1024px) {
+  main.about-container {
+    padding: 1.5rem;
+    max-width: 90%;
+    
+    .about-me h1,
+    .my-philosophy h1,
+    .my-interests h1,
+    .my-stack h1,
+    .my-indignation h1 {
+      font-size: 2rem;
+    }
+    
+    p { font-size: 1.1rem; }
+    .my-stack h2 { font-size: 1.5rem; }
+  }
+
+  .disclaimer-1 { max-width: 90%; font-size: 0.9rem; }
+
+  main.contacts-container {
+    padding: 5rem 2rem;
+    max-width: 80%;
+    
+    h1 { font-size: 2rem; }
+    p { font-size: 1.1rem; }
+    a { font-size: 1.2rem; padding: 8px 15px; }
+  }
+
+  .hero {
+    h1 { font-size: 3rem; }
+    h2 { font-size: 1.5rem; }
+  }
+
+  .button-group a { font-size: 1.2rem; padding: 8px 15px; }
+
+  .header {
+    font-size: 20px;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .repos-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  main.home-container {
+    height: auto;
+    min-height: 90vh;
+    padding: 2rem;
+    
+    .hero {
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.2rem; }
+    }
+    
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+      max-width: 250px;
+      
+      a {
+        margin: 5px 0;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  main.about-container {
+    padding: 1rem;
+    max-width: 95%;
+    
+    h1 { font-size: 1.8rem; }
+    p { font-size: 1rem; line-height: 1.4; }
+    .my-stack h2 { font-size: 1.3rem; }
+  }
+
+  .disclaimer-1 { padding: 0.5rem; font-size: 0.85rem; }
+
+  main.contacts-container {
+    padding: 3rem 1rem;
+    max-width: 95%;
+    
+    h1 { font-size: 1.8rem; }
+    p { font-size: 1rem; }
+    a { font-size: 1rem; padding: 8px 12px; margin: 8px 0; }
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 0.8rem;
+    font-size: 18px;
+  }
+
+  .repos-grid { grid-template-columns: 1fr; }
+  .repo-card { padding: 1rem; }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1rem; }
+  }
+
+  main.about-container {
+    h1 { font-size: 1.5rem; }
+    p { font-size: 0.9rem; }
+    .my-stack h2 { font-size: 1.2rem; }
+  }
+
+  .disclaimer-1 { font-size: 0.75rem; }
+
+  main.contacts-container {
+    h1 { font-size: 1.5rem; }
+    p { font-size: 0.9rem; }
+  }
+
+  .header {
+    font-size: 16px;
+  }
+}

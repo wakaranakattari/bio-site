@@ -1,0 +1,20 @@
+@import 'variables';
+
+@import 'mixins';
+
+@import 'animations';
+
+body {
+  font-family: $font-main;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
+
+@import 'header';
+@import 'home';
+@import 'about';
+@import 'projects';
+@import 'writing';
+@import 'contacts';
+
+@import 'media';

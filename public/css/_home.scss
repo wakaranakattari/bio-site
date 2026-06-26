@@ -1,0 +1,19 @@
+main.home-container {
+  @include flex-center;
+  height: 90vh;
+  flex-direction: column;
+  text-align: center;
+  color: var(--accent-color);
+  animation: fadeIn 0.5s ease;
+
+  .hero {
+    h1 { font-size: 4rem; margin: -15px; }
+    h2 { font-size: 2rem; margin-bottom: 2rem; }
+  }
+
+  .button-group a {
+    @include btn-style;
+    font-size: 25px;
+    margin: 10px;
+  }
+}
