@@ -1,12 +1,13 @@
 ;; @file    <pages/projects.cljs>
 ;; @author  <wakaranakattari@gmail.com>
-;; @info    <projects page, displays github repositories with loading skeleton>
-;; @version <1.6>
+;; @info    <projects page, displays github repositories>
+;; @version <1.7>
 
 ;; @secstart->@secname <nsrq>
 (ns bio-site.ui.pages.projects
   (:require [reagent.core :as r]
             [bio-site.ui.components.header :as header]
+            [bio-site.ui.components.repo-card :as repo-card]
             [bio-site.services.github :as github]))
 ;; @secend->@secname   <nsrq>
 
@@ -58,7 +59,6 @@
   ;; @funcinfo <renders language breakdown bar + legend, like github>
 (defn lang-bar
   [languages]
-
   (let [percents (github/calc-lang-percents languages)]
     (when (seq percents)
       [:div.lang-breakdown
@@ -82,40 +82,30 @@
 ;; @secend->@secname   <langbar>
 
 ;; @secstart->@secname <projectspage>
-  ;; @funcinfo <projects page, fetches repos from github api, shows skeleton while loading>
+  ;; @funcinfo <projects page, fetches repos from github api, fades in on load>
 (defn page []
   ;; @info <state: list of repositories>
-  (let [repos   (r/atom [])
-        ;; @info <state: loading flag>
-        loading (r/atom true)
+  (let [repos       (r/atom [])
         ;; @info <state: visibility flag for fade-in animation>
-        visible (r/atom false)
+        visible     (r/atom false)
         ;; @info <state: track if initial load is done>
         initialized (r/atom false)]
 
-    ;; @info <fetch repos with requestAnimationFrame for smooth rendering>
+    ;; @info <fetch repos once on mount>
     (when-not @initialized
       (reset! initialized true)
-      
-      ;; @info <use requestAnimationFrame to ensure skeleton renders first>
-      (js/requestAnimationFrame
-       (fn []
-         (github/fetch-repos!
-          (fn [data]
-            ;; @info <on success: update repos and stop loading>
-            (reset! repos data)
-            (reset! loading false)
-            ;; @info <use requestAnimationFrame for smooth paint>
-            (js/requestAnimationFrame
-             (fn []
-               ;; @info <tiny delay for browser to paint the grid>
-               (js/setTimeout #(reset! visible true) 16))))
-          (fn [_]
-            ;; @info <on error: stop loading, show empty state>
-            (reset! loading false)
-            (js/requestAnimationFrame
-             (fn []
-               (js/setTimeout #(reset! visible true) 16))))))))
+      (github/fetch-repos!
+       (fn [data]
+         ;; @info <on success: update repos, trigger fade-in>
+         (reset! repos data)
+         (js/requestAnimationFrame
+          (fn []
+            (js/setTimeout #(reset! visible true) 16))))
+       (fn [_]
+         ;; @info <on error: show empty state>
+         (js/requestAnimationFrame
+          (fn []
+            (js/setTimeout #(reset! visible true) 16))))))
 
     (fn []
       [:div
@@ -123,26 +113,10 @@
        [:main.projects-container
         [:h1 "projects"]
 
-        ;; @info <if loading, show skeleton grid>
-        (if @loading
-          [:div.repos-grid.skeleton-grid
-           (doall (for [_ (range 6)]
-                    ^{:key (random-uuid)}
-                    [:div.skeleton-card
-                     [:div.skeleton-title]
-                     [:div.skeleton-line]
-                     [:div.skeleton-line.short]]))]
-
-          ;; @info <if loaded, show actual repos with fade-in animation>
-          [:div.repos-grid {:class (when @visible "repos-visible")}
-           (for [repo @repos]
-             ^{:key (:name repo)}
-             [:a.repo-card {:href (:html_url repo) :target "_blank"}
-              [:h3 (:name repo)]
-              ;; @info <repo description, fallback to "no description">
-              [:p (or (:description repo) "no description")]
-              ;; @info <repo stars count>
-              [:span.repo-stars "★  " (:stargazers_count repo)]
-              ;; @info <language breakdown bar with percentages>
-              [lang-bar (:languages repo)]])])]])))
+        ;; @info <repos grid with fade-in animation>
+        [:div.repos-grid {:class (when @visible "repos-visible")}
+         (for [repo @repos]
+           ^{:key (:name repo)}
+           ;; @info <pass full repo map to repo-card component>
+           [repo-card/repo-card (assoc repo :lang-bar-fn lang-bar)])]]])))
 ;; @secend->@secname   <projectspage>
