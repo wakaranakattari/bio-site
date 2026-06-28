@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "watch:css": "sass public/scss/main.scss public/css/styles.css --watch",
-    "build:css": "sass public/css/main.scss public/css/styles.css --style=compressed",
+    "build:css": "sass public/scss/main.scss public/css/styles.css --style=compressed",
     "dev": "npm run watch:css & shadow-cljs watch app",
     "build": "npm run build:css && shadow-cljs release app"
   },
