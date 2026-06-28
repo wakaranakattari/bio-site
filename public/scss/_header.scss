@@ -13,11 +13,11 @@
     transition: $transition-speed;
     
     &:hover {
-      color: var(--yellow-accent);
+      color: var(--pink-accent);
     }
     
     &.active {
-      color: var(--yellow-accent);
+      color: var(--pink-accent);
     }
   }
 
