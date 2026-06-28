@@ -23,7 +23,7 @@
     [:section.about-me
      [:h1 "about me"]
 
-     [:p "nikita · 18 years · infj-a"]
+     [:p "nikita · gay · 18 years · infj-a"]
 
      [:p "im a software engineer who loves exotic and strange languages"]]
     ;; @secend->@secname   <aboutme>
