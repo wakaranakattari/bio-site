@@ -1,11 +1,12 @@
 ;; @file    <core.cljs>
 ;; @author  <wakaranakattari@gmail.com>
 ;; @info    <core site>
-;; @version <1.4>
+;; @version <1.5>
 
 ;; @secstart->@secname <nsrq>
 (ns bio-site.core
   (:require [reagent.dom.client :as rdc]
+            [bio-site.router :as router]
             [bio-site.ui.pages.home :as home]
             [bio-site.ui.pages.about :as about]
             [bio-site.ui.pages.projects :as projects]
@@ -15,7 +16,7 @@
 
 ;; @funcinfo <main site routing>
 (defn current-page []
-  (let [path (.-pathname js/location)]
+  (let [path @router/current-path]
     (cond
       (.startsWith path "/about")    [about/page]
       (.startsWith path "/projects") [projects/page]
@@ -29,6 +30,7 @@
 ;; @funcinfo <application entry point>
 ;; @export   true
 (defn ^:export init []
+  (router/init-popstate!)
   (rdc/render root [current-page]))
 
 ;; @funcinfo <hot reload callback>
