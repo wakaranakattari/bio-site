@@ -11,7 +11,7 @@
 ;; @secstart->@secname <notfoundpage>
   ;; @funcinfo <404 page, shown for unknown routes>
 (defn page []
-  [:div
+  [:div.page-lazy
 
    [:main.not-found-container
     [:h1 "404"]
