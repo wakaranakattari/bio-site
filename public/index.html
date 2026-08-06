@@ -1,11 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-  <title>Bio</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" type="image/png" href="https://i.ibb.co/5gpJx2vM/Group-2-1.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/">
+
+  <title>wakaranakattari</title>
+  <meta name="description" content="personal site of nikita aka wkrn - software engineer who loves exotic and strange programming languages. projects, writing and contacts.">
+
+  <link rel="canonical" href="https://wakaranakattari.netlify.app/">
+
+  <meta property="og:title" content="nikita aka wkrn · software engineer">
+  <meta property="og:description" content="personal site of nikita aka wkrn - software engineer who loves exotic and strange programming languages. projects, writing and contacts.">
+  <meta property="og:url" content="https://wakaranakattari.netlify.app/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap">
+
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("theme") === "light") {
+          document.documentElement.classList.add("light-theme");
+        }
+      } catch (e) {}
+    })();
+  </script>
 
 </head>
 
