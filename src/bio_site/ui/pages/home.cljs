@@ -10,7 +10,7 @@
 ;; @secstart->@secname <homepage>
 ;; @funcinfo <home page implementation, displays hero section and navigation buttons>
 (defn page []
-  [:div.page-lazy
+  [:div
 
    ;; @secstart->@secname <homecontainer>
    ;; @info <main container with hero and CTA buttons>
