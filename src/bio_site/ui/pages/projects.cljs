@@ -1,12 +1,11 @@
 ;; @file    <pages/projects.cljs>
 ;; @author  <wakaranakattari@gmail.com>
 ;; @info    <projects page, displays github repositories>
-;; @version <1.7>
+;; @version <1.8>
 
 ;; @secstart->@secname <nsrq>
 (ns bio-site.ui.pages.projects
   (:require [reagent.core :as r]
-            [bio-site.ui.components.header :as header]
             [bio-site.ui.components.repo-card :as repo-card]
             [bio-site.services.github :as github]))
 ;; @secend->@secname   <nsrq>
@@ -63,7 +62,6 @@
     (when (seq percents)
       [:div.lang-breakdown
 
-       ;; @info <colored bar with segments per language>
        [:div.lang-bar
         (for [{:keys [lang percent]} percents]
           ^{:key lang}
@@ -71,7 +69,6 @@
            {:style {:width            (str (.toFixed percent 1) "%")
                     :background-color (get lang-colors lang "#888")}}])]
 
-       ;; @info <legend: color dot + name + percent>
        [:div.lang-legend
         (for [{:keys [lang percent]} percents]
           ^{:key lang}
@@ -84,39 +81,46 @@
 ;; @secstart->@secname <projectspage>
   ;; @funcinfo <projects page, fetches repos from github api, fades in on load>
 (defn page []
-  ;; @info <state: list of repositories>
-  (let [repos       (r/atom [])
-        ;; @info <state: visibility flag for fade-in animation>
-        visible     (r/atom false)
-        ;; @info <state: track if initial load is done>
-        initialized (r/atom false)]
+  (let [repos   (r/atom [])
+        visible (r/atom false)
+        error   (r/atom nil)]
 
-    ;; @info <fetch repos once on mount>
-    (when-not @initialized
-      (reset! initialized true)
-      (github/fetch-repos!
-       (fn [data]
-         ;; @info <on success: update repos, trigger fade-in>
-         (reset! repos data)
-         (js/requestAnimationFrame
-          (fn []
-            (js/setTimeout #(reset! visible true) 16))))
-       (fn [_]
-         ;; @info <on error: show empty state>
-         (js/requestAnimationFrame
-          (fn []
-            (js/setTimeout #(reset! visible true) 16))))))
+    ;; @funcinfo <fetch repos, resets state and can be reused for retry>
+    (letfn [(fetch! []
+              (reset! error nil)
+              (reset! visible false)
+              (github/fetch-repos!
+               (fn [data]
+                 (reset! repos data)
+                 (js/requestAnimationFrame
+                  (fn []
+                    (js/setTimeout #(reset! visible true) 16))))
+               (fn [msg]
+                 (reset! error msg)
+                 (js/requestAnimationFrame
+                  (fn []
+                    (js/setTimeout #(reset! visible true) 16))))))]
 
-    (fn []
-      [:div
-       [header/header]
-       [:main.projects-container
-        [:h1 "projects"]
+      (fetch!)
 
-        ;; @info <repos grid with fade-in animation>
-        [:div.repos-grid {:class (when @visible "repos-visible")}
-         (for [repo @repos]
-           ^{:key (:name repo)}
-           ;; @info <pass full repo map to repo-card component>
-           [repo-card/repo-card (assoc repo :lang-bar-fn lang-bar)])]]])))
+      (fn []
+        [:div
+         [:main.projects-container
+          [:h1 "projects"]
+          [:p.projects-intro "some things i built and keep on github"]
+
+          (if @error
+            [:div.projects-status.repos-visible
+             [:p "failed to load repositories"]
+             [:p.projects-error-msg @error]
+             [:button.retry-btn {:type "button" :on-click fetch!} "try again"]]
+
+            (if (and @visible (empty? @repos))
+              [:div.projects-status.repos-visible
+               [:p "no repositories yet"]]
+
+              [:div.repos-grid {:class (when @visible "repos-visible")}
+               (for [repo @repos]
+                 ^{:key (:name repo)}
+                 [repo-card/repo-card (assoc repo :lang-bar-fn lang-bar)])]))]]))))
 ;; @secend->@secname   <projectspage>
