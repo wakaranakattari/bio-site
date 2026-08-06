@@ -1,4 +1,7 @@
 /js/* /js/:splat 200
 /css/* /css/:splat 200
 
+/writing/*.md /writing/:splat 200
+/writing/index.json /writing/index.json 200
+
 /* /index.html 200
