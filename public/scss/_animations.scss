@@ -18,3 +18,9 @@
 .page-shell {
   animation: page-fade-in 0.3s ease both;
 }
+
+.page-lazy,
+.writing-list,
+.writing-article {
+  animation: page-fade-in 0.3s ease both;
+}

@@ -23,32 +23,33 @@
          (fn [msg] (reset! error msg))))
       :reagent-render
       (fn []
-        [:main.writing-container
-         [:h1 "writing"]
-         [:p.writing-intro
-          "my personal forum: ideas, articles and thoughts, sorted by category."]
+        (let [loaded (boolean (seq @articles))]
+          [:main.writing-container
+           [:h1 "writing"]
+           [:p.writing-intro
+            "my personal forum: ideas, articles and thoughts, sorted by category."]
 
-         (if @error
-           [:div.writing-status
-            [:p "failed to load articles"]
-            [:p.writing-error-msg @error]]
-
-           (if (empty? @articles)
+           (if @error
              [:div.writing-status
-              [:p "no articles yet"]]
+              [:p "failed to load articles"]
+              [:p.writing-error-msg @error]]
 
-             [:div.writing-list
-              (for [{:keys [slug title category date summary]} @articles]
-                ^{:key slug}
-                [:a.writing-card {:href (str "/writing/" slug)
-                                  :on-click (fn [e]
-                                              (.preventDefault e)
-                                              (router/navigate! (str "/writing/" slug)))}
-                 [:div.writing-card-meta
-                  [:span.writing-category category]
-                  [:span.writing-date date]]
-                 [:h2 title]
-                 (when summary [:p.writing-summary summary])])]))])})))
+             (if (empty? @articles)
+               [:div.writing-status {:key (if loaded "error" "loading")}
+                [:p "no articles yet"]]
+
+               [:div.writing-list {:key "loaded"}
+                (for [{:keys [slug title category date summary]} @articles]
+                  ^{:key slug}
+                  [:a.writing-card {:href (str "/writing/" slug)
+                                    :on-click (fn [e]
+                                                (.preventDefault e)
+                                                (router/navigate! (str "/writing/" slug)))}
+                   [:div.writing-card-meta
+                    [:span.writing-category category]
+                    [:span.writing-date date]]
+                   [:h2 title]
+                   (when summary [:p.writing-summary summary])])]))]))})))
 ;; @secend->@secname   <articlelist>
 
 ;; @secstart->@secname <articleview>
@@ -89,7 +90,7 @@
               [:p.writing-error-msg error]]
 
              :else
-             [:article.writing-article
+             [:article.writing-article {:key "loaded"}
               [:div.writing-card-meta
                [:span.writing-category (:category meta)]
                [:span.writing-date (:date meta)]]

@@ -42,8 +42,9 @@
     (when (nil? page)
       (load-page! page-key page-lazy))
     (if page
-      [page]
-      [:div])))
+      [:div.page-lazy {:key (str (name page-key) "-loaded")}
+       [page]]
+      [:div.page-lazy {:key (str (name page-key) "-loading")}])))
 ;; @secend->@secname   <lazypages>
 
 ;; @funcinfo <main site routing>
