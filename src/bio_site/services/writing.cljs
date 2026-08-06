@@ -1,7 +1,7 @@
 ;; @file    <services/writing.cljs>
 ;; @author  <wakaranakattari@gmail.com>
 ;; @info    <writing service: fetch articles manifest and markdown content>
-;; @version <1.0>
+;; @version <1.1>
 
 ;; @secstart->@secname <ns>
 (ns bio-site.services.writing
@@ -29,14 +29,45 @@
     {:meta {} :body raw}))
 ;; @secend->@secname   <frontmatter>
 
+;; @secstart->@secname <manifestcache>
+  ;; @funcinfo <localStorage cache for articles manifest with 24h ttl>
+(def ^:private cache-key "writing-articles-cache")
+(def ^:private cache-ttl-ms (* 24 60 60 1000))
+
+  ;; @funcinfo <read cached manifest from localStorage, nil if missing or expired>
+(defn- read-cache []
+  (try
+    (when-let [raw (.getItem js/localStorage cache-key)]
+      (let [cached (js->clj (js/JSON.parse raw) :keywordize-keys true)
+            ts     (:ts cached)]
+        (when (and ts (> (+ ts cache-ttl-ms) (.now js/Date)))
+          (:articles cached))))
+    (catch js/Error _ nil)))
+
+  ;; @funcinfo <write manifest to localStorage with current timestamp>
+(defn- write-cache!
+  [articles]
+  (try
+    (.setItem js/localStorage cache-key
+              (js/JSON.stringify (clj->js {:ts (.now js/Date) :articles articles})))
+    (catch js/Error _ nil)))
+
+  ;; @funcinfo <get cached manifest synchronously, nil if none>
+(defn cached-articles
+  []
+  (read-cache))
+;; @secend->@secname   <manifestcache>
+
 ;; @secstart->@secname <fetchmanifest>
-  ;; @funcinfo <fetch the list of articles from the static manifest>
+  ;; @funcinfo <fetch the list of articles from the static manifest, updates cache>
 (defn fetch-articles!
   [on-success on-error]
   (-> (js/fetch "/writing/index.json")
       (.then #(.json %))
       (.then (fn [data]
-               (on-success (js->clj data :keywordize-keys true))))
+               (let [articles (js->clj data :keywordize-keys true)]
+                 (write-cache! articles)
+                 (on-success articles))))
       (.catch (fn [err]
                 (on-error (.-message err))))))
 ;; @secend->@secname   <fetchmanifest>

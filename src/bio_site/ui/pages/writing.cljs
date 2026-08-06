@@ -1,7 +1,7 @@
 ;; @file    <pages/writing.cljs>
 ;; @author  <wakaranakattari@gmail.com>
 ;; @info    <writing page, personal forum with articles and ideas>
-;; @version <2.0>
+;; @version <2.1>
 
 ;; @secstart->@secname <nsrq>
 (ns bio-site.ui.pages.writing
@@ -11,10 +11,11 @@
 ;; @secend->@secname   <nsrq>
 
 ;; @secstart->@secname <articlelist>
-  ;; @funcinfo <article list component, fetches manifest on mount>
+  ;; @funcinfo <article list component, renders cached manifest instantly, refreshes in background>
 (defn article-list []
-  (let [articles (r/atom [])
-        loading  (r/atom true)
+  (let [cached   (writing/cached-articles)
+        articles (r/atom (or cached []))
+        loading  (r/atom (nil? cached))
         error    (r/atom nil)]
     (r/create-class
      {:component-did-mount
