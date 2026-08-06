@@ -1,27 +1,95 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+
 main.about-container {
-  @include page-container(900px, 2rem);
-  
-  .about-me,
-  .my-philosophy,
-  .my-interests,
-  .my-stack,
-  .my-indignation {
-    @include text-block;
+  @include page-container(800px, 2rem);
+
+  .about-hero {
     margin-bottom: 3rem;
-    
-    &:last-child { margin-bottom: 0; }
+    padding-bottom: 2rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent-color) 12%, transparent);
+
+    h1 {
+      font-size: 2.5rem;
+      color: var(--pink-accent);
+      margin: 0 0 0.5rem;
+    }
+
+    .about-tagline {
+      font-size: 1.05rem;
+      margin-bottom: 1.25rem;
+      opacity: 0.9;
+      color: var(--blue-accent);
+    }
+
+    p {
+      font-size: 1.15rem;
+      line-height: 1.6;
+      margin: 0;
+      color: var(--accent-color);
+      opacity: 0.85;
+    }
   }
 
-  .my-stack {
+  .about-block {
+    margin-bottom: 3rem;
+
+    &:last-child { margin-bottom: 0; }
+
     h2 {
-      font-size: 1.8rem;
-      margin: 1.5rem 0 0.5rem 0;
+      font-size: 1.6rem;
+      margin: 0 0 1.25rem;
+      padding-left: 0.85rem;
+      border-left: 3px solid var(--pink-accent);
+      color: var(--pink-accent);
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      margin: 1.5rem 0 0.6rem;
       color: var(--green-accent);
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 0.9rem;
+      color: var(--accent-color);
+      opacity: 0.85;
+
+      &:last-child { margin-bottom: 0; }
+    }
+
+    .tech-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+
+      .tech-chip {
+        padding: 0.35rem 0.85rem;
+        border: 1px solid color-mix(in srgb, var(--accent-color) 15%, transparent);
+        border-radius: 999px;
+        background: var(--bg-second);
+        color: var(--accent-color);
+        font-size: 0.85rem;
+        opacity: 0.9;
+        transition: $transition-speed;
+        cursor: default;
+
+        &:hover {
+          border-color: var(--pink-accent);
+          color: var(--pink-accent);
+          transform: translateY(-2px);
+        }
+      }
     }
   }
 }
 
 .disclaimer-1 {
-  @include page-container(900px, 1rem);
+  @include page-container(800px, 1rem 0 0);
   color: var(--pink-accent);
+  font-size: 0.9rem;
+  opacity: 0.7;
 }
