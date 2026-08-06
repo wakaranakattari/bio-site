@@ -14,42 +14,52 @@
   ;; @funcinfo <article list component, fetches manifest on mount>
 (defn article-list []
   (let [articles (r/atom [])
+        loading  (r/atom true)
         error    (r/atom nil)]
     (r/create-class
      {:component-did-mount
       (fn []
         (writing/fetch-articles!
-         (fn [data] (reset! articles data))
-         (fn [msg] (reset! error msg))))
+         (fn [data]
+           (reset! articles data)
+           (reset! loading false))
+         (fn [msg]
+           (reset! error msg)
+           (reset! loading false))))
       :reagent-render
       (fn []
-        (let [loaded (boolean (seq @articles))]
-          [:main.writing-container
-           [:h1 "writing"]
-           [:p.writing-intro
-            "my personal forum: ideas, articles and thoughts, sorted by category."]
+        [:main.writing-container
+         [:h1 "writing"]
+         [:p.writing-intro
+          "my personal forum: ideas, articles and thoughts, sorted by category."]
 
-           (if @error
-             [:div.writing-status
-              [:p "failed to load articles"]
-              [:p.writing-error-msg @error]]
+         (cond
+           @error
+           [:div.writing-status
+            [:p "failed to load articles"]
+            [:p.writing-error-msg @error]]
 
-             (if (empty? @articles)
-               [:div.writing-status {:key (if loaded "error" "loading")}
-                [:p "no articles yet"]]
+           @loading
+           [:div.writing-status
+            [:p "loading articles..."]]
 
-               [:div.writing-list {:key "loaded"}
-                (for [{:keys [slug title category date summary]} @articles]
-                  ^{:key slug}
-                  [:a.writing-card {:href (str "/writing/" slug)
-                                    :on-click (fn [e]
-                                                (.preventDefault e)
-                                                (router/navigate! (str "/writing/" slug)))}
-                   [:div.writing-card-meta
-                    [:span.writing-category category]
-                    [:span.writing-date date]]
-                   [:h2 title]
-                   (when summary [:p.writing-summary summary])])]))]))})))
+           (empty? @articles)
+           [:div.writing-status
+            [:p "no articles yet"]]
+
+           :else
+           [:div.writing-list
+            (for [{:keys [slug title category date summary]} @articles]
+              ^{:key slug}
+              [:a.writing-card {:href (str "/writing/" slug)
+                                :on-click (fn [e]
+                                            (.preventDefault e)
+                                            (router/navigate! (str "/writing/" slug)))}
+               [:div.writing-card-meta
+                [:span.writing-category category]
+                [:span.writing-date date]]
+               [:h2 title]
+               (when summary [:p.writing-summary summary])])])])})))
 ;; @secend->@secname   <articlelist>
 
 ;; @secstart->@secname <articleview>
@@ -90,7 +100,7 @@
               [:p.writing-error-msg error]]
 
              :else
-             [:article.writing-article {:key "loaded"}
+             [:article.writing-article
               [:div.writing-card-meta
                [:span.writing-category (:category meta)]
                [:span.writing-date (:date meta)]]
