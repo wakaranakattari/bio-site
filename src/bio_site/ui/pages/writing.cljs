@@ -1,66 +1,38 @@
 ;; @file    <pages/writing.cljs>
 ;; @author  <wakaranakattari@gmail.com>
 ;; @info    <writing page, personal forum with articles and ideas>
-;; @version <2.1>
+;; @version <2.2>
 
 ;; @secstart->@secname <nsrq>
 (ns bio-site.ui.pages.writing
   (:require [reagent.core :as r]
             [bio-site.services.writing :as writing]
+            [bio-site.data.articles :as articles]
             [bio-site.router :as router]))
 ;; @secend->@secname   <nsrq>
 
 ;; @secstart->@secname <articlelist>
-  ;; @funcinfo <article list component, renders cached manifest instantly, refreshes in background>
+  ;; @funcinfo <article list component, manifest is embedded at build time>
 (defn article-list []
-  (let [cached   (writing/cached-articles)
-        articles (r/atom (or cached []))
-        loading  (r/atom (nil? cached))
-        error    (r/atom nil)]
-    (r/create-class
-     {:component-did-mount
-      (fn []
-        (writing/fetch-articles!
-         (fn [data]
-           (reset! articles data)
-           (reset! loading false))
-         (fn [msg]
-           (reset! error msg)
-           (reset! loading false))))
-      :reagent-render
-      (fn []
-        [:main.writing-container
-         [:h1 "writing"]
-         [:p.writing-intro
-          "my personal forum: ideas, articles and thoughts, sorted by category."]
-
-         (cond
-           @error
-           [:div.writing-status
-            [:p "failed to load articles"]
-            [:p.writing-error-msg @error]]
-
-           @loading
-           [:div.writing-status
-            [:p "loading articles..."]]
-
-           (empty? @articles)
-           [:div.writing-status
-            [:p "no articles yet"]]
-
-           :else
-           [:div.writing-list
-            (for [{:keys [slug title category date summary]} @articles]
-              ^{:key slug}
-              [:a.writing-card {:href (str "/writing/" slug)
-                                :on-click (fn [e]
-                                            (.preventDefault e)
-                                            (router/navigate! (str "/writing/" slug)))}
-               [:div.writing-card-meta
-                [:span.writing-category category]
-                [:span.writing-date date]]
-               [:h2 title]
-               (when summary [:p.writing-summary summary])])])])})))
+  [:main.writing-container
+   [:h1 "writing"]
+   [:p.writing-intro
+    "my personal forum: ideas, articles and thoughts, sorted by category."]
+   [:div.writing-list
+    (if (seq articles/articles)
+     (for [{:keys [slug title category date summary]} articles/articles]
+       ^{:key slug}
+       [:a.writing-card {:href (str "/writing/" slug)
+                         :on-click (fn [e]
+                                     (.preventDefault e)
+                                     (router/navigate! (str "/writing/" slug)))}
+        [:div.writing-card-meta
+         [:span.writing-category category]
+         [:span.writing-date date]]
+        [:h2 title]
+        (when summary [:p.writing-summary summary])])
+     [:div.writing-status
+      [:p "no articles yet"]])]])
 ;; @secend->@secname   <articlelist>
 
 ;; @secstart->@secname <articleview>
