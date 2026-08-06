@@ -14,9 +14,12 @@
 ;; @funcinfo <navigate without page reload via pushState>
 (defn navigate! [path]
   (.pushState js/history nil "" path)
-  (reset! current-path path))
+  (reset! current-path path)
+  (.scrollTo js/window 0 0))
 
 ;; @funcinfo <handle browser back/forward buttons>
 (defn init-popstate! []
   (.addEventListener js/window "popstate"
-    (fn [_] (reset! current-path (.-pathname js/location)))))
+    (fn [_]
+      (reset! current-path (.-pathname js/location))
+      (.scrollTo js/window 0 0))))

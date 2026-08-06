@@ -4,4 +4,13 @@
  :builds {:app {:target :browser
                 :output-dir "public/js"
                 :asset-path "/js"
-                :modules {:main {:init-fn bio-site.core/init}}}}}
+                :module-loader true
+                :modules {:main     {:init-fn bio-site.core/init}
+                          :about    {:entries [bio-site.ui.pages.about]
+                                     :depends-on #{:main}}
+                          :projects {:entries [bio-site.ui.pages.projects]
+                                     :depends-on #{:main}}
+                          :contacts {:entries [bio-site.ui.pages.contacts]
+                                     :depends-on #{:main}}
+                          :writing  {:entries [bio-site.ui.pages.writing]
+                                     :depends-on #{:main}}}}}}
