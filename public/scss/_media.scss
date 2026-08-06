@@ -2,41 +2,40 @@
   main.about-container {
     padding: 1.5rem;
     max-width: 90%;
-    
-    .about-me h1,
-    .my-philosophy h1,
-    .my-interests h1,
-    .my-stack h1,
-    .my-indignation h1 {
+
+    .about-hero h1 {
       font-size: 2rem;
     }
-    
-    p { font-size: 1.1rem; }
-    .my-stack h2 { font-size: 1.5rem; }
+
+    .about-block h2 { font-size: 1.4rem; }
+    p { font-size: 1.05rem; }
+    h3 { font-size: 1rem; }
   }
 
   .disclaimer-1 { max-width: 90%; font-size: 0.9rem; }
 
   main.contacts-container {
-    padding: 5rem 2rem;
-    max-width: 80%;
-    
+    padding: 3rem 2rem;
+    max-width: 85%;
+    margin: 0 auto;
+
     h1 { font-size: 2rem; }
-    p { font-size: 1.1rem; }
-    a { font-size: 1.2rem; padding: 8px 15px; }
+    p { font-size: 1.05rem; }
   }
 
   .hero {
-    h1 { font-size: 3rem; }
-    h2 { font-size: 1.5rem; }
+    h1 { font-size: 2.6rem; }
+    h2 { font-size: 1.3rem; }
+    .hero-intro { font-size: 1rem; }
   }
 
-  .button-group a { font-size: 1.2rem; padding: 8px 15px; }
+  .button-group .button-link { padding: 0.75rem 1rem; gap: 1rem; }
 
   .header {
     font-size: 20px;
     flex-wrap: wrap;
-    gap: 1rem;
+
+    .header-nav { gap: 1rem; }
   }
 
   .repos-grid {
@@ -50,22 +49,24 @@
     height: auto;
     min-height: 90vh;
     padding: 2rem;
-    
+    justify-content: flex-start;
+    padding-top: 4rem;
+
     .hero {
       h1 { font-size: 2rem; }
-      h2 { font-size: 1.2rem; }
+      h2 { font-size: 1.1rem; }
+      .hero-intro { font-size: 0.95rem; max-width: 90%; }
     }
-    
+
     .button-group {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.75rem;
       width: 100%;
-      max-width: 250px;
-      
-      a {
-        margin: 5px 0;
-        font-size: 1rem;
+      max-width: 280px;
+
+      .button-link {
+        padding: 0.8rem 1.1rem;
       }
     }
   }
@@ -73,10 +74,13 @@
   main.about-container {
     padding: 1rem;
     max-width: 95%;
-    
-    h1 { font-size: 1.8rem; }
-    p { font-size: 1rem; line-height: 1.4; }
-    .my-stack h2 { font-size: 1.3rem; }
+
+    .about-hero h1 { font-size: 1.8rem; }
+    .about-block h2 { font-size: 1.3rem; }
+    p { font-size: 1rem; line-height: 1.6; }
+    h3 { font-size: 0.95rem; }
+
+    .tech-chips .tech-chip { font-size: 0.8rem; }
   }
 
   .disclaimer-1 { padding: 0.5rem; font-size: 0.85rem; }
@@ -84,16 +88,38 @@
   main.contacts-container {
     padding: 3rem 1rem;
     max-width: 95%;
-    
+
     h1 { font-size: 1.8rem; }
     p { font-size: 1rem; }
-    a { font-size: 1rem; padding: 8px 12px; margin: 8px 0; }
+
+    .contact-item {
+      padding: 0.85rem 1rem;
+      gap: 0.9rem;
+
+      .contact-icon { width: 36px; height: 36px; font-size: 0.75rem; }
+      .contact-name { font-size: 0.95rem; }
+      .contact-handle { font-size: 0.8rem; }
+    }
+  }
+
+  main.writing-container {
+    padding: 1.5rem 1rem;
+    max-width: 95%;
+  }
+
+  main.not-found-container {
+    h1 { font-size: 3.5rem; }
+    p { font-size: 1.1rem; }
   }
 
   .header {
-    flex-direction: column;
-    gap: 0.8rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     font-size: 18px;
+
+    .header-nav {
+      gap: 1rem;
+    }
   }
 
   .repos-grid { grid-template-columns: 1fr; }
@@ -102,14 +128,16 @@
 
 @media (max-width: 480px) {
   .hero {
-    h1 { font-size: 1.5rem; }
+    h1 { font-size: 1.6rem; }
     h2 { font-size: 1rem; }
+    .hero-intro { font-size: 0.9rem; }
   }
 
   main.about-container {
-    h1 { font-size: 1.5rem; }
+    .about-hero h1 { font-size: 1.5rem; }
+    .about-block h2 { font-size: 1.2rem; }
     p { font-size: 0.9rem; }
-    .my-stack h2 { font-size: 1.2rem; }
+    h3 { font-size: 0.9rem; }
   }
 
   .disclaimer-1 { font-size: 0.75rem; }
@@ -119,7 +147,22 @@
     p { font-size: 0.9rem; }
   }
 
+  main.not-found-container {
+    h1 { font-size: 2.5rem; }
+    p { font-size: 0.9rem; }
+  }
+
   .header {
     font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

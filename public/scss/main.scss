@@ -1,6 +1,14 @@
-@import 'variables';
-@import 'mixins';
-@import 'animations';
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'animations';
+@use 'header';
+@use 'home';
+@use 'about';
+@use 'projects';
+@use 'writing';
+@use 'contacts';
+@use 'not_found';
+@use 'media';
 
 body {
   font-family: $font-main;
@@ -8,11 +16,7 @@ body {
   color: var(--text-main);
 }
 
-@import 'header';
-@import 'home';
-@import 'about';
-@import 'projects';
-@import 'writing';
-@import 'contacts';
-
-@import 'media';
+:focus-visible {
+  outline: 2px solid var(--pink-accent);
+  outline-offset: 3px;
+}

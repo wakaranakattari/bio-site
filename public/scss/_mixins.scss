@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 @mixin flex-center {
   display: flex;
   justify-content: center;
@@ -25,6 +27,11 @@
     transform: translateY(-2px);
     box-shadow: 0 0 15px var(--bg-second);
   }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
 }
 
 @mixin page-container($max-width: 500px, $padding: 2rem) {
@@ -33,7 +40,6 @@
   max-width: $max-width;
   margin: 0 auto;
   padding: $padding;
-  animation: fadeIn 0.5s ease;
 }
 
 @mixin text-block {
