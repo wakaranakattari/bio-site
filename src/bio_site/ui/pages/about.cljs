@@ -1,7 +1,7 @@
 ;; @file    <pages/about.cljs>
 ;; @author  <wakaranakattari@gmail.com>
 ;; @info    <about me page>
-;; @version <1.5>
+;; @version <1.6>
 
 ;; @secstart->@secname <nsrq>
 (ns bio-site.ui.pages.about)
@@ -79,16 +79,19 @@
      [:h2 "what i use"]
 
      [:h3 "main languages"]
-     [tech-chips ["go" "elixir" "rust"]]
+     [tech-chips ["haskell" "ocaml" "elixir" "c++"]]
 
      [:h3 "second languages"]
-     [tech-chips ["typescript" "clojure" "perl"]]
+     [tech-chips ["perl" "clojure"]]
 
      [:h3 "frontend"]
-     [tech-chips ["solidjs" "next.js" "reagent" "elysia" "bun" "javascript" "typescript" "wasm"]]
+     [tech-chips ["solidjs" "react" "elysia" "bun" "typescript" "wasm"]]
 
      [:h3 "tools & db"]
-     [tech-chips ["neovim" "vscode" "docker" "nginx" "linux" "postgres" "mongodb" "redis"]]]
+     [tech-chips ["neovim" "docker" "nginx" "linux" "postgres" "mongodb" "redis"]]
+
+     [:h3 "focus areas"]
+     [tech-chips ["functional programming" "systems languages" "language design" "developer tooling" "distributed systems"]]]
     ;; @secend->@secname   <mystack>
 
     ;; @secstart->@secname <myindignation>
