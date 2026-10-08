@@ -1,13 +1,16 @@
 ;; @file    <pages/projects.cljs>
 ;; @author  <wakaranakattari@gmail.com>
 ;; @info    <projects page, displays github repositories>
-;; @version <1.8>
+;; @version <2.5>
 
 ;; @secstart->@secname <nsrq>
 (ns bio-site.ui.pages.projects
-  (:require [reagent.core :as r]
+  (:require [clojure.string :as str]
+            [reagent.core :as r]
             [bio-site.ui.components.repo-card :as repo-card]
-            [bio-site.services.github :as github]))
+            [bio-site.services.github :as github]
+            [bio-site.utils.theme :as theme]
+            [bio-site.utils.reveal :refer [reveal-props]]))
 ;; @secend->@secname   <nsrq>
 
 ;; @secstart->@secname <langcolors>
@@ -92,6 +95,64 @@
    "Tape"          "#888"})
 ;; @secend->@secname   <langcolors>
 
+;; @secstart->@secname <langicon>
+  ;; @funcinfo <verified simpleicons slugs, generic transform as fallback>
+(def lang-slugs
+  {"Haskell" "haskell" "Rust" "rust" "Go" "go" "OCaml" "ocaml"
+   "Elixir" "elixir" "Erlang" "erlang" "Clojure" "clojure"
+   "JavaScript" "javascript" "TypeScript" "typescript" "Python" "python"
+   "HTML" "html5" "CSS" "css" "SCSS" "sass" "Sass" "sass" "Shell" "gnubash"
+   "Java" "openjdk" "Perl" "perl" "Zig" "zig" "Ruby" "ruby" "PHP" "php"
+   "Swift" "swift" "Kotlin" "kotlin" "C" "c" "C++" "cplusplus" "C#" "dotnet"
+   "Dart" "dart" "Lua" "lua" "Vue" "vuedotjs" "Svelte" "svelte"
+   "Crystal" "crystal" "Dockerfile" "docker" "Emacs Lisp" "gnuemacs"
+   "Scala" "scala" "Nix" "nixos" "Nim" "nim" "F#" "fsharp" "Racket" "racket"
+   "Common Lisp" "commonlisp" "Gleam" "gleam" "Elm" "elm"
+   "PureScript" "purescript" "Julia" "julia" "Haxe" "haxe" "D" "d"
+   "Ada" "ada" "Fortran" "fortran" "R" "r" "Vim Script" "vim"
+   "Groovy" "apachegroovy" "Less" "less" "CoffeeScript" "coffeescript"
+   "Astro" "astro" "Solidity" "solidity" "GraphQL" "graphql"
+   "Markdown" "markdown" "YAML" "yaml" "JSON" "json" "TOML" "toml"
+   "XML" "xml" "Node.js" "nodedotjs" "CMake" "cmake"
+   "Jupyter Notebook" "jupyter" "Nunjucks" "nunjucks" "Stylus" "stylus"
+   "Handlebars" "handlebarsdotjs" "EJS" "ejs" "PostCSS" "postcss"
+   "Babel" "babel" "ESLint" "eslint" "Vite" "vite" "Webpack" "webpack"
+   "Gulp" "gulp" "Gradle" "gradle" "Maven" "apachemaven" "Jinja" "jinja"
+   "Pug" "pug" "V" "v" "Odin" "odin" "Red" "red" "Ring" "ring"
+   "GDScript" "godotengine"})
+
+  ;; @funcinfo <language logo via simpleicons cdn, hides itself when missing>
+(defn- lang-slug [lang]
+  (or (get lang-slugs lang)
+      (str/replace (str/lower-case (or lang "")) #"[^a-z0-9]" "")))
+
+(defn lang-icon [lang]
+  [:img.lang-icon {:src      (str "https://cdn.simpleicons.org/" (lang-slug lang) "/"
+                                  (if (= @theme/theme-state :dark) "A8C89F" "4a7c59"))
+                   :alt      ""
+                   :loading  "lazy"
+                   :on-error (fn [e]
+                               (set! (.. e -target -style -display) "none"))}])
+;; @secend->@secname   <langicon>
+
+;; @secstart->@secname <langfilter>
+  ;; @funcinfo <language filter chips, nil selected means all>
+(defn filter-chips [languages selected on-pick]
+  [:div.filter-chips
+   [:button.filter-chip {:type     "button"
+                         :class    (when (nil? @selected) "active")
+                         :on-click (fn [_] (on-pick nil))}
+    "all"]
+   (doall
+    (for [lang languages]
+      ^{:key lang}
+      [:button.filter-chip {:type     "button"
+                            :class    (when (= lang @selected) "active")
+                            :on-click (fn [_] (on-pick lang))}
+       [lang-icon lang]
+       lang]))])
+;; @secend->@secname   <langfilter>
+
 ;; @secstart->@secname <langbar>
   ;; @funcinfo <renders language breakdown bar + legend, like github>
 (defn lang-bar
@@ -111,7 +172,7 @@
         (for [{:keys [lang percent]} percents]
           ^{:key lang}
           [:span.lang-item
-           [:span.lang-dot {:style {:background-color (get lang-colors lang "#888")}}]
+           [lang-icon lang]
            [:span.lang-name lang]
            [:span.lang-percent (str (.toFixed percent 1) "%")]])]])))
 ;; @secend->@secname   <langbar>
@@ -121,7 +182,9 @@
 (defn page []
   (let [repos   (r/atom [])
         visible (r/atom false)
-        error   (r/atom nil)]
+        error   (r/atom nil)
+        lang-filter (r/atom nil)
+        search (r/atom "")]
 
     ;; @funcinfo <fetch repos, resets state and can be reused for retry>
     (letfn [(fetch! []
@@ -142,23 +205,103 @@
       (fetch!)
 
       (fn []
-        [:div
-         [:main.projects-container
-          [:h1 "projects"]
-          [:p.projects-intro "some things i built and keep on github"]
+        (let [all       @repos
+              top-langs (->> all (keep :language) (frequencies) (sort-by val >) (map key) (take 6) (vec))
+              current   @lang-filter
+              q         (str/lower-case @search)
+              matches-q (fn [r]
+                          (or (empty? q)
+                              (str/includes? (str/lower-case (str (:name r) " "
+                                                                 (:description r) " "
+                                                                 (str/join " " (:topics r))))
+                                             q)))
+              shown     (vec (->> all
+                                  (filter #(or (nil? current) (= (:language %) current)))
+                                  (filter matches-q)))
+              stars     (reduce + 0 (map :stargazers_count all))
+              featured  (when (and (nil? current) (empty? q) (seq all))
+                          (take 3 (sort-by :stargazers_count > all)))
+              feat-names (set (map :name featured))
+              rest-shown (vec (remove #(contains? feat-names (:name %)) shown))
+              clear!    (fn []
+                          (reset! lang-filter nil)
+                          (reset! search ""))]
+          (js/console.log "PAGEDBG" (pr-str {:all (count all)
+                                             :shown (count shown)
+                                             :featured (count featured)
+                                             :rest (count rest-shown)
+                                             :rest-types (mapv type rest-shown)
+                                             :feat-types (mapv type featured)}))
+          [:div
+           [:main.projects-container
+            [:h1 "projects"]
+            [:p.projects-intro "some things i built and keep on github"]
 
-          (if @error
-            [:div.projects-status.repos-visible
-             [:p "failed to load repositories"]
-             [:p.projects-error-msg @error]
-             [:button.retry-btn {:type "button" :on-click fetch!} "try again"]]
+            ;; @info <live totals from loaded repos>
+            (when (seq all)
+              [:p.projects-stats (count all) " repos · " stars " ★"
+               (when (or current (seq q))
+                 (str " · showing " (count rest-shown)))])
 
-            (if (and @visible (empty? @repos))
+            ;; @info <language filter chips>
+            (when (seq top-langs)
+              [filter-chips top-langs lang-filter #(reset! lang-filter %)])
+
+            ;; @info <search toolbar, matches name, description and topics>
+            (when (seq all)
+              [:div.projects-toolbar
+               [:input.projects-search {:type      "text"
+                                        :placeholder "search repos, topics..."
+                                        :value     @search
+                                        :on-change #(reset! search (.. % -target -value))}]])
+
+            ;; @info <featured repos, top by stars>
+            (when (seq featured)
+              [:div.featured-block
+               [:div.repos-grid.featured-grid {:class (when @visible "repos-visible")}
+                (map-indexed
+                 (fn [idx repo]
+                   ^{:key (:name repo)}
+                   [repo-card/repo-card (assoc repo
+                                              :lang-bar-fn lang-bar
+                                              :featured? true
+                                              :reveal-delay (min 480 (* idx 60)))])
+                 featured)]])
+
+            (cond
+              @error
               [:div.projects-status.repos-visible
-               [:p "no repositories yet"]]
+               [:p "failed to load repositories"]
+               [:p.projects-error-msg @error]
+               [:button.retry-btn {:type "button" :on-click (fn [_] (fetch!))} "try again"]]
 
+              ;; @info <skeletons while first load>
+              (and (empty? all) (not @visible))
+              [:div.repos-grid.skeleton-grid
+               (for [i (range 6)]
+                 ^{:key i}
+                 [:div.repo-card.skeleton {:aria-hidden true}
+                  [:div.skel.skel-title]
+                  [:div.skel.skel-line]
+                  [:div.skel.skel-line.short]
+                  [:div.skel.skel-bar]])]
+
+              (and @visible (empty? rest-shown))
+              [:div.projects-status.repos-visible
+               [:p (if (seq all) "nothing matches, try another search" "no repositories yet")]
+               (when (or current (seq q))
+                 [:button.retry-btn {:type "button" :on-click (fn [_] (clear!))} "clear filters"])]
+
+              :else
+              ;; @info <stable grid, no remount on filter>
               [:div.repos-grid {:class (when @visible "repos-visible")}
-               (for [repo @repos]
-                 ^{:key (:name repo)}
-                 [repo-card/repo-card (assoc repo :lang-bar-fn lang-bar)])]))]]))))
+               (map-indexed
+                (fn [idx repo]
+                  ^{:key (:name repo)}
+                  [repo-card/repo-card (assoc repo
+                                              :lang-bar-fn lang-bar
+                                              ;; @info <stagger only unfiltered, plain visible on search>
+                                              :reveal-delay (when (and (nil? current) (empty? q))
+                                                              (min 480 (* idx 60))))])
+                rest-shown)])]])))))
 ;; @secend->@secname   <projectspage>

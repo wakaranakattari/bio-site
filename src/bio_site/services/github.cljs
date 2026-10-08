@@ -1,7 +1,7 @@
 ;; @file    <services/github.cljs>
 ;; @author  <wakaranakattari@gmail.com>
 ;; @info    <github fetch api for dynamic loading repos>
-;; @version <1.8>
+;; @version <2.0>
 
 ;; @secstart->@secname <ns>
 (ns bio-site.services.github)
@@ -16,7 +16,7 @@
 (defn- slim-repo
   [repo]
   (select-keys repo [:name :description :html_url :stargazers_count
-                     :forks_count :license :language :languages :pushed_at :updated_at]))
+                     :forks_count :license :language :languages :topics :pushed_at :updated_at]))
 
   ;; @funcinfo <read cached repos from localStorage, nil if missing or expired>
 (defn- read-cache []
@@ -152,3 +152,14 @@
                    :percent (/ (* bytes 100.0) total)}))
            (sort-by :percent >)))))
 ;; @secend->@secname   <calcpercents>
+
+;; @secstart->@secname <stats>
+  ;; @funcinfo <public stats fetch, reuses repos cache, returns repos count and stars sum>
+(defn fetch-stats!
+  [on-success]
+  (fetch-repos!
+   (fn [repos]
+     (on-success {:repos (count repos)
+                  :stars (reduce + 0 (map :stargazers_count repos))}))
+   (fn [_] nil)))
+;; @secend->@secname   <stats>
