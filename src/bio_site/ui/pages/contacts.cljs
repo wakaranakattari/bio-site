@@ -11,7 +11,7 @@
 ;; @secend->@secname   <nsrq>
 
 ;; @secstart->@secname <contactspage>
- ;; @funcinfo <contacts page implementation, basic contacts => github, telegram, discord>
+ ;; @funcinfo <contacts page implementation, basic contacts => github, email, discord>
 (defn page []
   [:div
 
@@ -67,12 +67,11 @@
        [:span.contact-name "github"]
        [:span.contact-handle "@wakaranakattari"]]
       [:span.contact-arrow "→"]]
-     [:a.contact-item {:href "https://t.me/wakaranakattari"
-                       :target "_blank" :rel "noopener noreferrer"}
-      [:span.contact-icon "tg"]
+     [:a.contact-item {:href "mailto:wakaranakattari"}
+      [:span.contact-icon "em"]
       [:span.contact-info
-       [:span.contact-name "telegram"]
-       [:span.contact-handle "@wakaranakattari"]]
+       [:span.contact-name "email"]
+       [:span.contact-handle "wakaranakattari"]]
       [:span.contact-arrow "→"]]
      [:a.contact-item {:href "https://discord.com/users/1466086440499941689"
                        :target "_blank" :rel "noopener noreferrer"}
