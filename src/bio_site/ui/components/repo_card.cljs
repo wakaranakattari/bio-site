@@ -64,11 +64,12 @@
                          forks_count license languages lang-bar-fn reveal-delay
                          topics pushed_at featured?]}]
   ;; @info <clicking on a repository takes u to the next page>
-  [:a (merge {:href html_url :target "_blank" :rel "noopener noreferrer"}
+  [:a (merge {:href html_url :target "_blank" :rel "noopener noreferrer"
+              :class (str "repo-card" (when featured? " featured") (when reveal-delay " reveal"))}
              (tilt/tilt-props)
              ;; @info <reveal only for entrance stagger, plain visible when filtering>
              (when reveal-delay
-               (reveal-props reveal-delay (str "repo-card" (when featured? " featured")))))
+               (dissoc (reveal-props reveal-delay nil) :class)))
 
    ;; @secstart->@secname <repomaster> :: @secinfo <gets name repos & stargazers count & forks count>
    [:div.repo-master
