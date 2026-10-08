@@ -20,7 +20,10 @@ main.home-container {
       line-height: 1.15;
 
       .hero-name {
-        color: var(--pink-accent);
+        background: linear-gradient(135deg, var(--pink-accent), var(--blue-accent));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
       }
     }
 
@@ -29,15 +32,30 @@ main.home-container {
       margin: 0 0 1rem;
       color: var(--blue-accent);
       font-weight: 600;
+      min-height: 2.4rem;
     }
 
     .hero-intro {
-      margin: 0 0 2.5rem;
+      margin: 0 0 1.5rem;
       font-size: 1.05rem;
       line-height: 1.6;
       color: var(--accent-color);
       opacity: 0.8;
       max-width: 480px;
+    }
+
+    .hero-stats {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin: 0 0 2.5rem;
+      font-size: 0.9rem;
+      color: var(--accent-color);
+      opacity: 0.75;
+
+      .hero-stat-dot {
+        opacity: 0.5;
+      }
     }
   }
 

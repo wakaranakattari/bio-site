@@ -1,10 +1,13 @@
 ;; @file    <pages/about.cljs>
 ;; @author  <wakaranakattari@gmail.com>
 ;; @info    <about me page>
-;; @version <1.6>
+;; @version <2.2>
 
 ;; @secstart->@secname <nsrq>
-(ns bio-site.ui.pages.about)
+(ns bio-site.ui.pages.about
+  (:require [bio-site.router :as router]
+            [bio-site.utils.reveal :refer [reveal-props]]
+            [bio-site.utils.tilt :as tilt]))
 ;; @secend->@secname   <nsrq>
 
 ;; @secstart->@secname <techchips>
@@ -17,7 +20,7 @@
 ;; @secend->@secname   <techchips>
 
 ;; @secstart->@secname <aboutpage>
-  ;; @funcinfo <about page implementation, this contains all the basic information about me and my indignation>
+  ;; @funcinfo <about page implementation, this contains all the basic information about me>
 (defn page []
   [:div
 
@@ -27,21 +30,18 @@
 
     ;; @secstart->@secname <aboutme>
       ;; @info <main information for me>
-    [:section.about-hero
+    [:section.about-hero (reveal-props 0)
      [:h1 "about me"]
 
-     [:p.about-tagline "nikita · gay · 18 years · infj-a"]
+     [:p.about-tagline "nikita · backend engineer · 18 years · infj-a"]
 
-     [:p "an explorer at heart, i express myself through software engineering. "
-      "i dont just write code - i look for stories, depth and elegance "
-      "in places most people overlook. whether its an obscure language, "
-      "a hidden track in an album, or a page in a book, im always chasing "
-      "that spark of genuine inspiration"]]
+     [:p "building backend systems with rust and go. "
+      "exploring r&d, functional programming, and programming language design with haskell."]]
     ;; @secend->@secname   <aboutme>
 
     ;; @secstart->@secname <myphilosophy>
       ;; @info <my personal philosophy>
-    [:section.about-block
+    [:section.about-block (reveal-props 60)
      [:h2 "my philosophy"]
 
      [:p "programming was never about standard solutions for me, or sitting "
@@ -59,11 +59,14 @@
 
     ;; @secstart->@secname <behindthecode>
       ;; @info <my most basics interests>
-    [:section.about-block
+    [:section.about-block (reveal-props 60)
      [:h2 "behind the code"]
 
      [:p "books - im an avid reader, i simply cannot imagine my life without them. "
       "they are my way of understanding human nature and finding new perspectives"]
+
+     [:h3 "favorite authors"]
+     [tech-chips ["kafka" "camus" "sartre" "dostoevsky" "strugatsky" "dan brown" "chuck palahniuk"]]
 
      [:p "music - something deeply personal to me. its a sanctuary, a place "
       "i always return to when i need to live through my emotions and find peace"]
@@ -74,85 +77,66 @@
     ;; @secend->@secname   <behindthecode>
 
     ;; @secstart->@secname <mystack>
-      ;; @info <my main stack, p.s... i very luv perl & clj..>
-    [:section.about-block
+      ;; @info <my main stack: haskell, rust, go>
+    [:section.about-block (reveal-props 60)
      [:h2 "what i use"]
 
      [:h3 "main languages"]
-     [tech-chips ["haskell" "ocaml" "elixir" "c++"]]
-
-     [:h3 "second languages"]
-     [tech-chips ["perl" "clojure"]]
-
-     [:h3 "frontend"]
-     [tech-chips ["solidjs" "react" "elysia" "bun" "typescript" "wasm"]]
-
-     [:h3 "tools & db"]
-     [tech-chips ["neovim" "docker" "nginx" "linux" "postgres" "mongodb" "redis"]]
+     [tech-chips ["haskell" "rust" "go"]]
 
      [:h3 "focus areas"]
-     [tech-chips ["functional programming" "systems languages" "language design" "developer tooling" "distributed systems"]]]
+     [tech-chips ["backend engineering" "systems programming" "functional programming" "r&d"]]]
     ;; @secend->@secname   <mystack>
 
-    ;; @secstart->@secname <myindignation>
-      ;; @info <these are my personal indignations and thoughts, please take it easy)>
-    [:section.about-block
-     ;; @info <*1 etc this is a footnote or a disclaimer, read below>
-     [:h2 "*1 my indignation"]
+    ;; @secstart->@secname <uses>
+      ;; @info <my environment: editor, os, and infra>
+    [:section.about-block (reveal-props 60)
+     [:h2 "uses"]
 
-     [:h3 "tunnel vision"]
-     [:p (str "i dont really understand why the vast majority of programmers "
-              "have such tunnel vision. there are so many great tools and programming languages "
-              "in the world, and because theyre not mainstream, people simply bury them. "
-              "theyre so full of stereotypes that they bury them without even trying them. "
-              "thats why i dont particularly like communicating with such people. "
-              "i believe they wont go beyond their comfort zone of one or two such tools "
-              "and will continue to live in their own rosy world")]
+     [:h3 "environment"]
+     [tech-chips ["neovim" "emacs" "arch linux" "docker" "nginx"]]
 
-     [:h3 "imposed stereotypes"]
-     [:p (str "people are too stereotypical, and its this imposed stereotype "
-              "that prevents them from discovering something new. ive encountered this "
-              "very stereotype myself. i used to think that non-mainstream tools were disgusting "
-              "and created for fun. take pascal, for example. the imposed stereotypes about the tool "
-              "mostly come from school years with blue screens and turbo pascal. "
-              "but the language is incredibly powerful for its tasks and is still improving "
-              "and evolving. with this example, i want to express my indignation "
-              "at the stereotypes imposed on developers and people in general. "
-              "after all, isnt it better to live in your own echo chamber and not let anyone in?)")]
+     [:h3 "data"]
+     [tech-chips ["postgres" "mongodb" "redis"]]]
+    ;; @secend->@secname   <uses>
 
-     [:h3 "toxic communities"]
-     [:p (str "unpopular tools and languages are unpopular for a reason: "
-              "theyve found their way into companies and relatively small communities. "
-              "its in these communities that truly cool and intelligent questions are asked, "
-              "rather than in huge, toxic communities where asking questions like "
-              "\"how do i properly dereference a pointer in c++?\" will get you beaten "
-              "to the punch and told youll never become a programmer. "
-              "its precisely because of this experience that ive had that "
-              "i prefer to remain in a small, friendly, and truly valuable community "
-              "rather than in huge, toxic, and inadequate ones")]
+    ;; @secstart->@secname <whatido>
+      ;; @info <what i actually do with my stack>
+    [:section.about-block (reveal-props 60)
+     [:h2 "what i do"]
 
-     [:h3 "tool philosophies"]
-     [:p (str "developers turn tools into philosophies, like linux, emacs, or vim, "
-              "and i call people like that schizophrenics. for me, a tool should remain a tool. "
-              "why do i use nvim & emacs? because its a very convenient text printer, nothing more. "
-              "why do i use arch linux and not customize it? because its a minimalist tool "
-              "fine-tuned for me without unnecessary clutter. i dont make a philosophy out of this, "
-              "i use what i truly need and find convenient, and i dont try to promote these tools "
-              "to others. when people are interested, i try to support them in their endeavors. "
-              "and most developers, especially amateurs of a wide range of school-age people, "
-              "say something like, \"what, you dont use hyperland on arch? youre not a real linux user\" "
-              "this kind of nonsense often reveals an inferiority complex in these guys. "
-              "they fight for their imaginary tool by insulting others and filling their own insecurities. "
-              "guys, dont do that. people dont really care about your opinions. "
-              "they dont suffer from your loud takeovers, but youll have mental health problems in the future")]]
-    ;; @secend->@secname   <myindignation>
+     [:h3 "rust & go"]
+     [:p "backend systems and architecture - apis, services, and developer tooling "
+      "that stay simple, fast, and easy to maintain."]
 
-    ;; @secstart->@secname <disclaimer1>
-      ;; @info <the disclaimer is there so that when people express dissatisfaction with my indignation, they can scroll down and read it>
-     [:p.disclaimer-1
-      " *1 - this is my personal opinion. "
-      "im not here to argue. "
-      "either you resonate with it or not - i genuinely dont care."]]])
-   ;; @secend->@secname <disclaimer1>
+     [:h3 "haskell"]
+     [:p "r&d, functional programming, and programming language design - "
+      "where i explore ideas that later make my backend work better."]]
+    ;; @secend->@secname   <whatido>
+
+    ;; @secstart->@secname <now>
+      ;; @info <what i am focused on right now>
+    [:section.about-block (reveal-props 60)
+     [:h2 "now"]
+
+     [:p "backend architecture, systems programming, programming languages, "
+      "developer tooling, and deeper exploration of software engineering."]
+
+     [:p "most of my code lives on github - "
+      "see the projects page for what im building."]
+
+     ;; @secstart->@secname <commcard> :: @secinfo <card linking to the full communication guide>
+     [:a (merge {:href "/communication"
+                 :class "comm-card"
+                 :on-click (fn [e]
+                             (.preventDefault e)
+                             (router/navigate! "/communication"))}
+                (tilt/tilt-props))
+      [:span.comm-card-text
+       [:span.comm-card-title "how i communicate"]
+       [:span.comm-card-sub "no meta-questions, no trolling - read the short guide"]]
+      [:span.comm-card-arrow "→"]]]]])
+     ;; @secend->@secname   <commcard>
+    ;; @secend->@secname   <now>
    ;; @secend->@secname <maincontainer>
 ;; @secend->@secname   <aboutpage>

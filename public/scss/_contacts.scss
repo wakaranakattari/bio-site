@@ -17,6 +17,20 @@ main.contacts-container {
     opacity: 0.85;
   }
 
+  .contacts-guide {
+    h2 {
+      font-size: 1.6rem;
+      margin: 2rem 0 1.25rem;
+      padding-left: 0.85rem;
+      border-left: 3px solid var(--pink-accent);
+      color: var(--pink-accent);
+    }
+
+    .comm-card {
+      @include comm-card;
+    }
+  }
+
   .contact-list {
     display: flex;
     flex-direction: column;
@@ -58,7 +72,7 @@ main.contacts-container {
       justify-content: center;
       width: 42px;
       height: 42px;
-      border-radius: 50%;
+      border-radius: 10px;
       background: var(--bg-main);
       color: var(--pink-accent);
       font-size: 0.85rem;
