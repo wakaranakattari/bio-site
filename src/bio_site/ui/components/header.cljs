@@ -1,11 +1,12 @@
 ;; @file    <components/header.cljs>
 ;; @author  <wakaranakattari@gmail.com>
 ;; @info    <header component>
-;; @version <1.6>
+;; @version <2.1>
 
 ;; @secstart->@secname <nsrc>
 (ns bio-site.ui.components.header
   (:require [bio-site.ui.components.theme-toggle :refer [theme-toggle]]
+            [bio-site.ui.components.palette :as palette]
             [bio-site.router :as router]))
 ;; @secend->@secname   <nsrc>
 
@@ -44,6 +45,16 @@
     [nav-link "/contacts" "contacts"]]
    ;; @secend->@secname    <navigation>
 
-   ;; @info <theme toggle button>
-   [theme-toggle]])
+   ;; @secstart->@secname <actions> :: @secinfo <palette and theme buttons>
+   [:div.header-actions
+    ;; @info <command palette button>
+    [:button.palette-btn {:type "button"
+                          :aria-label "open quick navigation"
+                          :on-click palette/open!}
+     "⌘k"]
+
+    ;; @info <theme toggle button>
+    [theme-toggle]]
+   ;; @secend->@secname   <actions>
+   ])
 ;; @secend->@secname   <headerrouting>

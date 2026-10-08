@@ -1,0 +1,100 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+
+main.comm-container {
+  @include page-container(700px, 2rem);
+
+  .comm-back {
+    margin-bottom: 1.5rem;
+
+    a {
+      text-decoration: none;
+      color: var(--accent-color);
+      font-size: 0.9rem;
+      transition: $transition-speed;
+
+      &:hover {
+        color: var(--pink-accent);
+      }
+    }
+  }
+
+  .comm-hero {
+    margin-bottom: 2.5rem;
+
+    h1 {
+      font-size: 2.5rem;
+      color: var(--pink-accent);
+      margin: 0 0 1rem;
+    }
+
+    p {
+      font-size: 1.15rem;
+      line-height: 1.6;
+      margin: 0;
+      color: var(--accent-color);
+      opacity: 0.85;
+    }
+  }
+
+  .comm-block {
+    margin-bottom: 2.5rem;
+
+    &:last-child { margin-bottom: 0; }
+
+    h2 {
+      font-size: 1.6rem;
+      margin: 0 0 1.25rem;
+      padding-left: 0.85rem;
+      border-left: 3px solid var(--pink-accent);
+      color: var(--pink-accent);
+    }
+
+    p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 0.9rem;
+      color: var(--accent-color);
+      opacity: 0.85;
+
+      &:last-child { margin-bottom: 0; }
+    }
+
+    .chat {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.6rem;
+      margin: 1.25rem 0;
+    }
+
+    .bubble {
+      position: relative;
+      max-width: 85%;
+      padding: 0.6rem 1rem;
+      border-radius: 4px 14px 14px 14px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--text-main);
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: -7px;
+        top: 0;
+        width: 10px;
+        height: 14px;
+        background: inherit;
+        clip-path: polygon(0 0, 100% 0, 100% 100%);
+      }
+    }
+
+    .bubble-bad {
+      background: color-mix(in srgb, var(--blue-accent) 25%, var(--bg-second));
+    }
+
+    .bubble-good {
+      background: color-mix(in srgb, var(--green-accent) 25%, var(--bg-second));
+    }
+  }
+}

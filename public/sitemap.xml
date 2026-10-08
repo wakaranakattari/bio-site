@@ -24,4 +24,8 @@
     <loc>https://wakaranakattari.netlify.app/contacts</loc>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://wakaranakattari.netlify.app/communication</loc>
+    <priority>0.5</priority>
+  </url>
 </urlset>

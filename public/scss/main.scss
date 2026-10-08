@@ -7,6 +7,8 @@
 @use 'projects';
 @use 'writing';
 @use 'contacts';
+@use 'communication';
+@use 'palette';
 @use 'not_found';
 @use 'media';
 
@@ -14,6 +16,7 @@ body {
   font-family: $font-main;
   background-color: var(--bg-main);
   color: var(--text-main);
+  padding-bottom: 6rem;
 }
 
 :focus-visible {

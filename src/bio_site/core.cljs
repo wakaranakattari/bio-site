@@ -1,7 +1,7 @@
 ;; @file    <core.cljs>
 ;; @author  <wakaranakattari@gmail.com>
 ;; @info    <core site>
-;; @version <1.7>
+;; @version <1.9>
 
 ;; @secstart->@secname <nsrq>
 (ns bio-site.core
@@ -14,6 +14,9 @@
             [bio-site.ui.pages.about :as about]
             [bio-site.ui.pages.projects :as projects]
             [bio-site.ui.pages.contacts :as contacts]
+            [bio-site.ui.pages.communication :as communication]
+            [bio-site.ui.components.palette :as palette]
+            [bio-site.ui.components.snow :as snow]
             [bio-site.ui.pages.writing :as writing]
             [bio-site.ui.pages.not-found :as not-found]))
 ;; @secend->@secname   <nsrq>
@@ -27,6 +30,7 @@
        (.startsWith path "/about")    [about/page]
        (.startsWith path "/projects") [projects/page]
        (.startsWith path "/contacts") [contacts/page]
+       (.startsWith path "/communication") [communication/page]
        (.startsWith path "/writing")  [writing/page]
        :else                          [not-found/page])]))
 
@@ -36,7 +40,9 @@
     [:div
      [header/header]
      [:div.page-shell {:key path}
-      [current-page]]]))
+      [current-page]]
+     [snow/snow]
+     [palette/palette]]))
 
 ;; @definfo <react root node>
 (defonce root (rdc/create-root (js/document.getElementById "app")))

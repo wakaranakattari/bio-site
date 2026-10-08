@@ -2,16 +2,30 @@
 @use 'mixins' as *;
 
 .header {
-  @include flex-between;
-  border-bottom: 1px solid var(--bg-second);
-  padding: 1rem;
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  max-width: calc(100% - 2rem);
+  padding: 0.6rem 1rem;
   font-size: 25px;
   flex-wrap: wrap;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--bg-main) 65%, transparent);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid color-mix(in srgb, var(--accent-color) 12%, transparent);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
 
   .header-nav {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 0.5rem;
     flex-wrap: wrap;
   }
 
@@ -20,19 +34,29 @@
     cursor: pointer;
     color: var(--accent-color);
     transition: $transition-speed;
-    
+    padding: 0.4rem 0.9rem;
+    border-radius: 8px;
+
     &:hover {
       color: var(--pink-accent);
+      transform: scale(1.08);
     }
-    
+
     &.active {
       color: var(--pink-accent);
+      background: var(--bg-second);
     }
   }
 
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
   .theme-btn {
-    margin-left: auto;
     @include flex-center;
+    height: 38px;
     cursor: pointer;
     text-decoration: none;
     border: 1px solid var(--bg-second);
@@ -40,7 +64,8 @@
     background-color: var(--bg-second);
     color: var(--accent-color);
     transition: $transition-speed;
-    font-size: 20px;
+    font-size: 15px;
+    line-height: 1;
     padding: 0.4rem 0.8rem;
     
     &:hover {
@@ -51,6 +76,25 @@
     &:active {
       transform: translateY(0);
       box-shadow: none;
+    }
+  }
+
+  .palette-btn {
+    @include flex-center;
+    height: 38px;
+    cursor: pointer;
+    border: 1px solid var(--bg-second);
+    border-radius: $border-radius;
+    background-color: var(--bg-second);
+    color: var(--accent-color);
+    transition: $transition-speed;
+    font-size: 15px;
+    line-height: 1;
+    padding: 0.4rem 0.8rem;
+
+    &:hover {
+      color: var(--pink-accent);
+      border-color: var(--pink-accent);
     }
   }
 }
