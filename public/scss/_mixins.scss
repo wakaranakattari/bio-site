@@ -55,3 +55,54 @@
     color: var(--accent-color);
   }
 }
+
+@mixin comm-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  padding: 1.1rem 1.25rem;
+  border-radius: 12px;
+  text-decoration: none;
+  background:
+    linear-gradient(var(--bg-second), var(--bg-second)) padding-box,
+    linear-gradient(135deg, var(--pink-accent), var(--blue-accent)) border-box;
+  border: 1px solid transparent;
+  transition: $transition-speed;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+
+    .comm-card-arrow {
+      transform: translateX(6px);
+      color: var(--pink-accent);
+    }
+  }
+
+  .comm-card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .comm-card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--accent-color);
+  }
+
+  .comm-card-sub {
+    font-size: 0.9rem;
+    color: var(--accent-color);
+    opacity: 0.75;
+  }
+
+  .comm-card-arrow {
+    margin-left: auto;
+    font-size: 1.4rem;
+    color: var(--blue-accent);
+    transition: $transition-speed;
+    flex-shrink: 0;
+  }
+}

@@ -15,6 +15,67 @@
   }
 }
 
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes caret-blink {
+  0%, 45% { opacity: 1; }
+  50%, 95% { opacity: 0; }
+}
+
 .page-lazy {
   animation: page-fade-in 0.3s ease both;
+}
+
+.reveal {
+  opacity: 0;
+}
+
+.reveal-visible {
+  animation: rise-in 0.45s ease-out both;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+.typing-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background: var(--pink-accent);
+  animation: caret-blink 1.1s steps(1) infinite;
+}
+
+.snow-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-visible {
+    opacity: 1;
+    animation: none;
+  }
+
+  .typing-caret {
+    animation: none;
+  }
+
+  .snow-canvas {
+    display: none;
+  }
 }
